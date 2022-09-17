@@ -1,0 +1,73 @@
+@use "@src/styles" as vars;
+
+.searching-item {
+  padding: 12px;
+  background: vars.$whiteColor;
+  display: flex;
+  gap: 12px;
+  flex-wrap: nowrap;
+  position: relative;
+  overflow: hidden;
+
+  &__img {
+    width: 65px;
+
+    & > .img-mockup {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      background: rgba($color: #000000, $alpha: 0.2);
+      border-radius: 6px;
+    }
+  }
+
+  &__content {
+    flex: 1;
+    padding: 4px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    & .title-mockup {
+      width: 40%;
+    }
+
+    & .content-mockup {
+      width: 20%;
+    }
+
+    & .title-mockup,
+    & .content-mockup {
+      height: 16px;
+      border-radius: 20px;
+      background: rgba($color: #000000, $alpha: 0.2);
+    }
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: -100%;
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.3) 100%,
+      transparent 0%
+    );
+    animation: slideX 2s linear infinite forwards;
+    opacity: 0;
+  }
+
+  @keyframes slideX {
+    from {
+      left: -100%;
+      opacity: 0;
+    }
+
+    to {
+      left: 0;
+      opacity: 1;
+    }
+  }
+}

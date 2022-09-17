@@ -1,0 +1,69 @@
+@use "@src/styles" as vars;
+
+.search-bar {
+  position: relative;
+  margin: 32px 0;
+}
+.search-bar__ip {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  background: vars.$whiteColor;
+  padding: 14px 8px;
+  width: 100%;
+  border-radius: 6px;
+  gap: 12px;
+
+  &:focus-within {
+    border: 1px solid vars.$primaryColor;
+    & > svg {
+      color: vars.$textColor;
+    }
+    & + .search-bar__result {
+      display: block;
+    }
+  }
+
+  & > svg {
+    color: rgba($color: #000000, $alpha: 0.4);
+    font-size: 22px;
+  }
+
+  & > input {
+    flex: 1;
+    border: none;
+    outline: none;
+    border: none;
+    font-size: 1.2rem;
+    color: #363636;
+    &::placeholder {
+      color: rgba($color: #000000, $alpha: 0.4);
+    }
+  }
+}
+
+.search-bar__result {
+  position: absolute;
+  top: calc(100% + 5px);
+  background-color: vars.$whiteColor;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 999;
+  display: none;
+  &:not(.s-waiting) {
+    & > .search-loader {
+      display: none;
+    }
+    & > .search-result {
+      display: block;
+    }
+  }
+}
+.search-result {
+  padding: 12px;
+  font-style: italic;
+  color: #4a4a4a;
+  font-weight: 400;
+  display: none;
+}

@@ -1,0 +1,217 @@
+@use "../../styles" as vars;
+
+.header-top {
+  box-shadow: 1px 0px 4px 1px rgba($color: #000000, $alpha: 0.2);
+  padding: 6px 0;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  z-index: 3;
+  background-color: vars.$whiteColor;
+  top: 0;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+
+  @include vars.breakpoint-down(md) {
+    flex-wrap: wrap;
+  }
+}
+
+.logo > a {
+  color: vars.$primaryColor;
+
+  @include vars.breakpoint-down(md) {
+    font-size: 1.2rem;
+  }
+
+  @include vars.breakpoint-down(xs) {
+    font-size: 1rem;
+  }
+  & h2 {
+    font-size: 2rem;
+  }
+  & span.first {
+    color: #9c92db;
+  }
+  & span.last {
+    color: #ff42d9;
+  }
+}
+
+.menu-btn {
+  border: none;
+  background: transparent;
+  font-size: 24px;
+  cursor: pointer;
+  display: none;
+  margin-left: auto;
+  transition: color 0.3s;
+  &:hover {
+    color: vars.$primaryColor;
+  }
+  @include vars.breakpoint-down(md) {
+    display: inline-block;
+  }
+}
+
+.menu {
+  display: flex;
+  flex: 1;
+  align-items: center;
+
+  @include vars.breakpoint-down(md) {
+    flex: 100%;
+    background: vars.$whiteColor;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+
+    &:not(.active) {
+      display: none;
+    }
+  }
+}
+.drop-toggle {
+  font-size: 16px;
+}
+.list-option {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  width: auto;
+
+  @include vars.breakpoint-down(md) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    width: 100%;
+  }
+}
+.cate-drop-grid {
+  --itemWidth: 150px;
+  --cols: 3;
+  @include vars.breakpoint-down(md) {
+    width: 100%;
+    --itemWidth: 50%;
+    --cols: 2;
+  }
+}
+
+.list-drop-grid {
+  --itemWidth: 200px;
+  --cols: 1;
+  @include vars.breakpoint-down(md) {
+    width: 100%;
+    flex-direction: column;
+  }
+}
+
+.cate-drop-grid,
+.list-drop-grid {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 12px;
+  width: calc(var(--itemWidth) * var(--cols) + 12px * 2);
+  padding: 12px;
+}
+
+.drop-content__items {
+  width: var(--itemWidth);
+  color: vars.$textColor;
+  transition: color 0.3s;
+  font-size: 0.85rem;
+  &:hover {
+    color: vars.$primaryColor;
+  }
+}
+
+.login-register {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+
+  @include vars.breakpoint-down(md) {
+    margin-left: inherit;
+  }
+
+  & .btn {
+    font-size: 14px;
+    white-space: nowrap;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
+
+.account {
+  @include vars.breakpoint-down(md) {
+    width: 100%;
+    margin-bottom: 6px;
+  }
+  @extend .login-register;
+  & .custom-drop {
+    row-gap: 0;
+    padding: 0 !important;
+    & .drop-toggle-btn {
+      font-weight: 400;
+    }
+
+    & .drop-content {
+      row-gap: 0 !important;
+    }
+
+    & .drop-items {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 12px 12px;
+      transition: color 0.3s;
+      color: vars.$textColor;
+      &:not(:last-child) {
+        border-bottom: 1px solid vars.$separatorColor;
+      }
+      &:hover {
+        color: vars.$primaryColor;
+      }
+    }
+  }
+}
+.account-drop-toggle {
+  font-weight: 600;
+}
+
+.account-drop-content {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  & a {
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    gap: 4px;
+    color: vars.$textColor;
+    transition: color 0.3s;
+    height: 50px;
+  }
+  & a:hover {
+    color: vars.$primaryColor;
+  }
+  & a:not(:last-child) {
+    border-bottom: 1px solid vars.$separatorColor;
+  }
+
+  @include vars.breakpoint-down(md) {
+    width: 100%;
+    flex-direction: column;
+    & a {
+      height: auto;
+      padding: 12px;
+    }
+  }
+}

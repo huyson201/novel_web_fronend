@@ -1,0 +1,8 @@
+@use "./variables" as vars;
+@use "./media" as m;
+
+@mixin centerStyle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

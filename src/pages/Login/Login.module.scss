@@ -1,0 +1,32 @@
+@use "@src/styles" as vars;
+
+.login-page {
+  width: 100%;
+  height: 100vh;
+  @include vars.centerStyle;
+  background: vars.$grayColor;
+}
+
+.from__body {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.forgot-password > a,
+.register-link > a {
+  color: vars.$primaryColor;
+  transition: all 0.3s;
+  &:hover {
+    color: vars.$textColor;
+  }
+}
+
+.register-link {
+  text-align: center;
+  font-weight: 400;
+}
+
+.login-btn {
+  width: 100%;
+}

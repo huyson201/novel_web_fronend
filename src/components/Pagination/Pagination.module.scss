@@ -1,0 +1,20 @@
+@use "@src/styles" as vars;
+.pagination {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  & li {
+    @include vars.centerStyle;
+    width: 40px;
+    height: 40px;
+    font-weight: 500;
+    border-radius: 4px;
+    border: 1px solid #d5d5d5;
+    cursor: pointer;
+    transition: all 0.25s;
+    &:hover {
+      border-color: vars.$primaryColor;
+    }
+  }
+}

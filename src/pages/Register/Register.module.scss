@@ -1,0 +1,65 @@
+@use "@src/styles" as vars;
+.register-page {
+  width: 100%;
+  height: 100vh;
+  @include vars.centerStyle;
+}
+.login-link {
+  text-align: center;
+  & > a {
+    color: vars.$primaryColor;
+    transition: all 0.3s;
+    &:hover {
+      color: vars.$textColor;
+    }
+  }
+}
+
+.check-box > label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+
+  & .custom-check-box {
+    $size: 20px;
+    width: $size;
+    height: $size;
+    border: 1px solid rgba($color: #000000, $alpha: 0.5);
+    border-radius: 4px;
+    @include vars.centerStyle;
+    color: vars.$whiteColor;
+
+    & svg {
+      font-size: 24px;
+      display: none;
+    }
+  }
+  & input {
+    display: none;
+
+    &:checked ~ .custom-check-box {
+      border: 1px solid vars.$primaryColor;
+      box-shadow: 0px 0px 4px vars.$primaryColor;
+      background: vars.$primaryColor;
+      & svg {
+        display: inline-block;
+      }
+    }
+  }
+
+  & .check-box__title {
+    font-size: 14px;
+    transition: all 0.3s;
+    & > a {
+      color: vars.$primaryColor;
+      &:hover {
+        color: vars.$textColor;
+      }
+    }
+  }
+}
+.register-btn {
+  width: 100%;
+}

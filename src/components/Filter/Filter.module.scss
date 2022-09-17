@@ -1,0 +1,71 @@
+@use "@src/styles" as vars;
+$btnSize: 40px;
+
+.btn {
+  display: inline-block;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 4px;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.filter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+  background: vars.$whiteColor;
+  padding: 8px 12px;
+}
+.filter-btn {
+  width: auto;
+  width: $btnSize;
+  height: $btnSize;
+  border: 1px solid #b5b5b5;
+  @include vars.centerStyle;
+
+  &.desc svg:first-child,
+  &:not(.desc) svg:last-child {
+    display: none;
+  }
+}
+.search-box {
+  width: calc(100% - $btnSize);
+  height: $btnSize;
+  display: flex;
+  align-items: center;
+  background-color: vars.$grayColor;
+  padding: 4px 8px;
+  border-radius: 4px;
+  justify-content: space-between;
+  box-sizing: border-box;
+  gap: 4px;
+
+  &:focus-within {
+    border: 1px solid vars.$primaryColor;
+    & > svg {
+      color: vars.$textColor;
+    }
+  }
+
+  & > svg {
+    font-size: 24px;
+    color: #b5b5b5;
+  }
+
+  & input {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    width: 100%;
+    font-size: 15px;
+    padding: 0 6px;
+    &::placeholder {
+      color: #b5b5b5;
+    }
+  }
+}

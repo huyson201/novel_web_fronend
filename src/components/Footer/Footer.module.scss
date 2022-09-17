@@ -1,0 +1,48 @@
+@use "../../styles" as v;
+
+.footer {
+  padding: 40px 0;
+}
+
+.footer__logo {
+  font-size: 1.5rem;
+  color: v.$primaryColor;
+  font-weight: 700;
+}
+.footer__content {
+  font-size: 14px;
+  text-align: justify;
+}
+.footer__app-links {
+  margin-top: 8px;
+  & img {
+    width: 120px;
+    height: 35px;
+    object-fit: cover;
+    margin: 0 4px;
+  }
+}
+
+.footer__web-rule {
+  margin-top: 4px;
+
+  @include v.breakpoint-down(xxs) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  & a {
+    color: v.$primaryColor;
+    transition: all 0.3s;
+    font-weight: 400;
+    margin: 0 12px;
+
+    &:hover {
+      color: v.$textColor;
+    }
+  }
+}
+.container {
+  @include v.centerStyle;
+  flex-direction: column;
+}

@@ -1,0 +1,20 @@
+@use "@src/styles" as vars;
+.novel-full-item__links {
+  display: block;
+  &:not(:last-child) {
+    border-bottom: 1px solid vars.$separatorColor;
+  }
+}
+.novel-full-items {
+  padding: 16px;
+  transition: all 0.3s;
+  background: vars.$whiteColor;
+
+  &:hover {
+    background: vars.$grayHover;
+  }
+
+  &__cates {
+    margin-top: 8px;
+  }
+}

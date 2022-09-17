@@ -1,0 +1,84 @@
+@use "@src/styles" as vars;
+.profile-row {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+}
+.disabled {
+  opacity: 0.4;
+}
+.profile-row__title {
+  font-weight: 600;
+  width: 20%;
+}
+.profile-row__value {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.edit-btn {
+  width: auto;
+  margin-left: auto;
+  @include vars.centerStyle;
+  gap: 12px;
+  color: vars.$primaryColor;
+  font-size: 16px;
+  font-weight: 400;
+  transition: color 0.3s;
+  &:hover {
+    color: vars.$textColor;
+  }
+  & svg {
+    font-size: 18px;
+  }
+}
+.edit-box {
+  padding: 0 8px;
+  &::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+}
+.edit-box__fields {
+  margin-bottom: 8px;
+  display: flex;
+  gap: 24px;
+  & input {
+    width: 100%;
+    padding: 6px 12px;
+    outline: none;
+    border-radius: 6px;
+    border: 1px solid vars.$grayColor;
+    &:focus {
+      border: 1px solid vars.$primaryColor;
+    }
+  }
+}
+.btn-save-multi-field {
+  @extend .btn-save;
+  float: right;
+}
+.profile-title {
+  text-align: center;
+  margin-bottom: 12px;
+}
+.btn-save {
+  width: auto;
+  margin-left: auto;
+  font-weight: 400;
+  font-size: 14px;
+  background: vars.$primaryColor;
+  color: vars.$primaryColor;
+  padding: 4px 8px;
+}
+.btn {
+  display: inline-block;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 4px;
+  text-align: center;
+  transition: all 0.3s;
+}

@@ -1,0 +1,18 @@
+@use "@src/styles" as vars;
+.list-book-page {
+  padding-top: 32px;
+  padding-bottom: 64px;
+  background: vars.$grayColor;
+  .list-book {
+    &__title {
+      margin-bottom: 24px;
+      color: vars.$textColor;
+      font-weight: 600;
+      font-size: 1.3rem;
+    }
+
+    & .pagination-wrapper {
+      position: unset;
+    }
+  }
+}

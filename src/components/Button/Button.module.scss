@@ -1,0 +1,61 @@
+@use "../../styles" as vars;
+$buttonColor: (
+  "primary": vars.$primaryColor,
+  "gray": rgba(0, 0, 0, 0.05),
+  "light": vars.$whiteColor,
+  "blue": vars.$blueColor,
+  "yellow": #ffe08a,
+);
+
+$textColors: (
+  "white": vars.$whiteColor,
+  "black": vars.$textColor,
+);
+
+$hoverColor: (
+  "primary": vars.$primaryHover,
+  "gray": vars.$grayHover,
+  "blue": vars.$blueColor2,
+  "yellow": #ffdc7d,
+);
+
+.btn {
+  display: inline-block;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 4px;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.btn-primary {
+  background: vars.$primaryColor;
+  color: vars.$whiteColor;
+  &:hover {
+    background: vars.$primaryHover;
+    color: vars.$whiteColor;
+  }
+}
+.btn-gray {
+  background: vars.$grayColor;
+  color: vars.$textColor;
+  &:hover {
+    background: vars.$grayHover;
+    color: vars.$textColor;
+  }
+}
+.btn-yellow {
+  background: #ffe08a;
+  color: vars.$textColor;
+  &:hover {
+    background: #ffdc7d;
+    color: vars.$textColor;
+  }
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}

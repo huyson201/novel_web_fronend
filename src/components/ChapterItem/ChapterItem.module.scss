@@ -1,0 +1,25 @@
+@use "@src/styles" as vars;
+.chapter-items {
+  padding: 8px;
+  transition: all 0.25s;
+  & > a {
+    color: vars.$textColor;
+  }
+  &:not(:last-child) {
+    border-bottom: 1px solid vars.$separatorColor;
+  }
+  &:hover {
+    background: vars.$grayColor;
+  }
+  &__title {
+    margin-bottom: 4px;
+    &-number {
+      font-weight: 600;
+      margin-right: 12px;
+    }
+  }
+  & .times {
+    font-size: 14px;
+    font-style: italic;
+  }
+}

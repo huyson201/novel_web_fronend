@@ -1,0 +1,96 @@
+@use "@src/styles" as vars;
+
+.list-items {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  background-color: vars.$whiteColor;
+  &:not(:last-child) {
+    border-bottom: 1px solid vars.$separatorColor;
+  }
+}
+.img-box {
+  width: 60px;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+
+  @include vars.breakpoint-down(md) {
+    width: 160px;
+  }
+
+  @include vars.breakpoint-down(xs) {
+    width: 70px;
+    height: 100px;
+  }
+
+  & img {
+    width: 100%;
+    height: auto;
+    min-height: 90px;
+    border-radius: 6px;
+  }
+}
+
+.list-items__contents {
+  display: flex;
+  width: calc(100% - 60px);
+  gap: 12px;
+
+  & > div {
+    width: calc(100% / 3);
+
+    @include vars.breakpoint-down(md) {
+      width: 100%;
+    }
+  }
+
+  @include vars.breakpoint-down(md) {
+    display: block;
+  }
+}
+.list-items__contents-title {
+  & a {
+    color: vars.$primaryColor;
+    transition: all 0.3s;
+    text-transform: capitalize;
+    font-size: 15px;
+
+    &:hover {
+      color: vars.$textColor;
+    }
+  }
+
+  & .author {
+    margin-top: 4px;
+    font-size: 14px;
+
+    @include vars.breakpoint-down(xs) {
+      margin-top: 0;
+    }
+  }
+}
+.chapter {
+  &__links {
+    color: vars.$primaryColor;
+    transition: all 0.3s;
+
+    &:hover {
+      color: vars.$textColor;
+    }
+  }
+
+  &__number {
+    font-weight: 700;
+    margin-right: 4px;
+  }
+}
+
+.cates {
+  @include vars.breakpoint-down(md) {
+    margin-top: 8px;
+  }
+}
+.times {
+  font-size: 14px;
+  margin-top: 4px;
+}

@@ -1,0 +1,10 @@
+.book-case {
+  &__title {
+    margin-bottom: 8px;
+    padding: 8px;
+  }
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}

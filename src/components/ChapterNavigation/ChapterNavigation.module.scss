@@ -1,0 +1,116 @@
+@use "@src/styles" as vars;
+
+.left-nav-wrapper {
+  & .touch-area {
+    width: 100%;
+    height: 100%;
+  }
+}
+.left-nav-bg {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  max-height: 100vh;
+  height: 100vh;
+  z-index: 3;
+  background: rgba(10, 10, 10, 0.86);
+  display: none;
+}
+.show .left-nav-bg {
+  display: block;
+}
+.show .left-nav {
+  transform: translateX(0);
+}
+.left-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  background: vars.$whiteColor;
+  transform: translateX(-100%);
+  transition: all 0.25s 0.3s;
+  z-index: 9;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: #d3d3d3;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #b5b5b5;
+    border-radius: 50px;
+  }
+}
+.left-nav__content {
+  flex: 1;
+  background-color: vars.$grayColor;
+}
+.title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 8px 12px;
+}
+.filter {
+  position: sticky;
+  left: 0;
+  top: 0;
+  z-index: 9;
+}
+.chapter-items {
+  padding: 8px;
+  border-top: 1px solid vars.$grayHover;
+  &:last-child {
+    border-bottom: 1px solid vars.$grayHover;
+  }
+
+  &.active {
+    color: vars.$blueColor;
+  }
+}
+.chapter-number {
+  font-weight: 600;
+  margin-right: 8px;
+}
+.times {
+  font-size: 14px;
+  font-style: italic;
+  margin-top: 4px;
+}
+
+.controls-btn {
+  position: sticky;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+  background: vars.$whiteColor;
+  padding: 12px 6px;
+  gap: 8px;
+  width: 100%;
+  display: flex;
+  & a {
+    width: 50%;
+    padding: 8px 14px;
+    font-size: 16px;
+    font-weight: 400;
+    background-color: vars.$whiteColor;
+    border: 1px solid #dbdbdb;
+    color: vars.$textColor;
+    &:hover {
+      border-color: #b5b5b5;
+      box-shadow: 0px 0px 2px 1px rgba($color: #000000, $alpha: 0.1);
+      background-color: vars.$whiteColor;
+    }
+    &.disabled {
+      pointer-events: none;
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}

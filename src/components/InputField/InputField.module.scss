@@ -1,0 +1,60 @@
+@use "@src/styles" as vars;
+.ip-fields {
+  display: block;
+  width: 100%;
+
+  &__title {
+    color: vars.$textColor;
+    font-weight: 700;
+    margin-bottom: 4px;
+    text-transform: capitalize;
+  }
+
+  & .ip-wrapper {
+    position: relative;
+  }
+
+  & input {
+    border: none;
+    background: vars.$separatorColor;
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 16px;
+
+    &:focus {
+      outline: none;
+      border: 1px solid vars.$primaryColor;
+      box-shadow: 0px 0px 4px vars.$primaryColor;
+    }
+    &::placeholder {
+      text-transform: lowercase;
+      color: rgba($color: #000000, $alpha: 0.4);
+    }
+  }
+
+  & .icon {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    color: red;
+    width: 18px;
+    height: 18px;
+  }
+
+  &.ip-error input {
+    border: 1px solid red;
+  }
+
+  & .error-feedback {
+    color: red;
+    padding: 0 4px;
+    font-size: 13px;
+    margin-top: 4px;
+  }
+
+  &:not(.ip-error) :is(.error-feedback, .icon) {
+    display: none;
+  }
+}

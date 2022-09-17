@@ -1,0 +1,59 @@
+@use "@src/styles" as vars;
+.book-card-items {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+    display: block;
+  }
+}
+.cates {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  padding: 12px 8px;
+}
+.book-info {
+  position: absolute;
+  inset: 0;
+  background: rgba(54, 54, 54, 0.9);
+  border-radius: 6px;
+  z-index: 2;
+  color: vars.$whiteColor;
+  padding: 8px;
+  opacity: 0;
+  transition: all 0.3s;
+  overflow: hidden;
+  &:hover {
+    opacity: 1;
+  }
+}
+.book-info__title {
+  font-size: 1.4rem;
+  margin-bottom: 24px;
+  @include vars.breakpoint-down(md) {
+    font-size: 1rem;
+  }
+}
+.book-info__cates {
+  position: relative;
+  margin-bottom: 8px;
+  white-space: normal;
+  overflow: hidden;
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 80px;
+    height: 1px;
+    background: vars.$whiteColor;
+  }
+}
+.book-info__desc {
+  font-weight: 400;
+}
