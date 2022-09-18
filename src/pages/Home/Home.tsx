@@ -85,8 +85,8 @@ const Home = () => {
                 <Banner />
                 {/* search bar */}
                 <BookSearch placeholder='Tìm kiếm truyện...' />
-                <BookSlide title='Truyện Đề cử' />
-                <BookSlide title='Bảng Xếp Hạng ' />
+                <BookSlide type='recommend' title='Truyện Đề cử' />
+                <BookSlide type='popular' title='Bảng Xếp Hạng' />
 
                 {/* list novels */}
                 <section className={cx('list-novels')}>
@@ -99,7 +99,7 @@ const Home = () => {
                             </Link>
                         </div>
                         <div className={cx("list-novels__news-content", "list-contents")}>
-                            <ListBook dataList={books} />
+                            <ListBook />
                         </div>
                     </div>
                     <div className={cx("list-novels__full")}>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import BookCard from '@src/components/BookCard';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -7,13 +7,30 @@ import swiperOnChangePagination from '../../Helper/swiperOnChangePagination';
 import styles from './BookSlide.module.scss'
 import classNamesBind from 'classnames/bind';
 import classNames from 'classnames';
+import bookApi from '@src/apis/book.api';
+import { Book } from '@src/models';
 const cx = classNamesBind.bind(styles)
+
 export interface Props {
-    title?: string
+    title?: string,
+    type: 'popular' | 'recommend'
+}
+const slideActions = {
+    recommend: bookApi.getRecommendBooks,
+    popular: bookApi.getPopularBook
 }
 
-const BookSlide = ({ title }: Props) => {
 
+
+const BookSlide = ({ title, type }: Props) => {
+    const [slideData, setSlideData] = useState<Array<Book>>([])
+    useEffect(() => {
+        const fetchData = async () => {
+            let resData = await slideActions[type]()
+            setSlideData(resData)
+        }
+        fetchData()
+    }, [])
     return (
         <div className={cx('slider-wrapper')}>
             <Link to={'#'}>
@@ -39,7 +56,17 @@ const BookSlide = ({ title }: Props) => {
                 }}
 
             >
-                <SwiperSlide className={classNames('swiper-slide', cx('swiper-book-card'))}>
+                {/* <SwiperSlide className={classNames('swiper-slide', cx('swiper-book-card'))}>
+                    <BookCard className={cx('slide-content')} />
+                </SwiperSlide> */}
+                {
+                    slideData.map(value => (
+                        <SwiperSlide key={value.slug} className={classNames('swiper-slide', cx('swiper-book-card'))}>
+                            <BookCard book={value} className={cx('slide-content')} />
+                        </SwiperSlide>
+                    ))
+                }
+                {/* <SwiperSlide className={classNames('swiper-slide', cx('swiper-book-card'))}>
                     <BookCard className={cx('slide-content')} />
                 </SwiperSlide>
                 <SwiperSlide className={classNames('swiper-slide', cx('swiper-book-card'))}>
@@ -71,10 +98,7 @@ const BookSlide = ({ title }: Props) => {
                 </SwiperSlide>
                 <SwiperSlide className={classNames('swiper-slide', cx('swiper-book-card'))}>
                     <BookCard className={cx('slide-content')} />
-                </SwiperSlide>
-                <SwiperSlide className={classNames('swiper-slide', cx('swiper-book-card'))}>
-                    <BookCard className={cx('slide-content')} />
-                </SwiperSlide>
+                </SwiperSlide> */}
             </Swiper>
         </div>
     )

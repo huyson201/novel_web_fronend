@@ -14,7 +14,7 @@ import HeaderMenuItem from '../HeaderMenuItem/HeaderMenuItem'
 const cx = classnames.bind(style)
 
 const Header = () => {
-    const [showMenu, setShowMenu] = useState<boolean>(true)
+    const [showMenu, setShowMenu] = useState<boolean>(false)
 
 
     const auth = useAppSelector(state => state.auth)

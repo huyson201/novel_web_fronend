@@ -9,3 +9,20 @@ export const getTimeToNow = (time: string) => {
     return Math.round(duration.days()) + ' ngày trước.'
 
 }
+
+export const removeHTML = (data: any) => {
+    let divTag = document.createElement('div')
+    divTag.innerHTML = data
+    return divTag.textContent
+}
+
+export const getEllipsisText = (text: string | null, numberEnd = 80) => {
+    if (text === null) return
+    if (text.length === numberEnd) return text
+
+    if (text.length < numberEnd) {
+        return `${text}${' '.repeat(numberEnd - text.length)}`
+    }
+
+    return `${text.slice(0, numberEnd)}...`
+}

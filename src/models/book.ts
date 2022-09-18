@@ -1,4 +1,4 @@
-import { DefaultApiResponse, PaginationResponse } from './common';
+import { DefaultApiResponse } from './common';
 import { Category } from "./category"
 import { Chapter } from './chapter';
 
@@ -15,11 +15,10 @@ export interface Book {
     createdAt: string,
     updatedAt: string
     chapters?: [Chapter]
+    view: number
 }
 
-export interface BookResponse extends DefaultApiResponse {
-    data: PaginationResponse<Book>
-}
+
 
 export interface GetBook extends DefaultApiResponse {
     data: Book

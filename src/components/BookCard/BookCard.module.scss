@@ -28,6 +28,9 @@
   opacity: 0;
   transition: all 0.3s;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   &:hover {
     opacity: 1;
   }

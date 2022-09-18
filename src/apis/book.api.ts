@@ -1,12 +1,18 @@
-import { BookResponse, GetBook } from '@src/models';
-import defaultAxios from "./AxiosConfig"
+import { Book, PaginationResponse, GetBook } from '@src/models';
+import axiosClient from "./AxiosConfig"
 
 const bookApi = {
-    getPagination: (page: number = 1, order: string = 'updatedAt:desc') => {
-        return defaultAxios.get<BookResponse>('/books', { params: { page, order } })
+    getBookPagination: (page: number = 1, sort?: string, order?: string) => {
+        return axiosClient.get<PaginationResponse<Book>>('/books', { params: { page } })
     },
     getBook: (slug: string) => {
-        return defaultAxios.get<GetBook>(`/books/${slug}`)
+        return axiosClient.get<GetBook>(`/books/${slug}`)
+    },
+    getRecommendBooks: () => {
+        return axiosClient.get<Array<Book>>('/books/recommends')
+    },
+    getPopularBook: () => {
+        return axiosClient.get<Array<Book>>('/books/popular')
     }
 }
 

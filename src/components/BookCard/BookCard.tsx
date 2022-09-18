@@ -4,31 +4,36 @@ import styles from './BookCard.module.scss'
 
 import classNamesBind from 'classnames/bind'
 import classNames from 'classnames'
+import { Book } from '@src/models'
+import { removeHTML, getEllipsisText } from '@src/utils'
 const cx = classNamesBind.bind(styles)
 
 export interface Props {
     className?: string,
-    imgUrl?: string,
-    bookContent?: any
+    book: Book
 }
-const BookCard = ({ className }: Props) => {
+
+
+const BookCard = ({ className, book }: Props) => {
     return (
         <div className={classNames(cx('book-card-items'), className)}>
-            <Link to={'#'}>
-                <img src="https://cdn.tienvuc.xyz/media/banners/banner-cong-tu-biet-tu-app-3-eeaa1e.jpg" alt="slider-img" />
+            <Link to={book.slug}>
+                <img src={book.image} alt="slider-img" />
 
                 <div className={cx("cates")}>
                     <span className="tag tag-vip tag-yellow">VIP</span>
                 </div>
                 <div className={cx("book-info")}>
                     <h2 className={cx("book-info__title")}>
-                        Vạn Cổ Đệ Nhất Tông (Bản Dịch-Full)
+                        {getEllipsisText(book.title, 50)}
                     </h2>
-                    <div className={cx("book-info__cates")}>
-                        <span className="tag  tag-white tag-color-black hover-none">Tiên hiệp</span>
-                    </div>
-                    <div className={cx("book-info__desc")}>
-                        Giảm 10% khi mua tối thiểu 500 chươngGiảm 15% khi mua tối thiểu 1200 chươngGiảm 20%...
+                    <div className={cx('book-info__wrapper')}>
+                        <div className={cx("book-info__cates")}>
+                            <span className="tag  tag-white tag-color-black hover-none">{book.categories?.[0].name}</span>
+                        </div>
+                        <div className={cx("book-info__desc")}>
+                            {getEllipsisText(removeHTML(book.desc))}
+                        </div>
                     </div>
                 </div>
             </Link>
