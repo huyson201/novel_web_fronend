@@ -14,6 +14,7 @@ export interface PaginationResponse<T> {
         limit: number
     },
     total: number,
+    per_page: number
     result: [T]
 }
 
@@ -25,3 +26,4 @@ export interface Slider {
         slug: string
     }
 }
+export type Order = 'asc' | 'desc'

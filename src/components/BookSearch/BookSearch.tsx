@@ -1,9 +1,8 @@
 import React, { useRef, ChangeEvent, useState, useEffect } from 'react'
 import { IoSearch } from 'react-icons/io5'
-import useDebounce from '@src/hooks/useDebounce'
+import { useDebounce } from '@src/hooks'
 import styles from './BookSearch.module.scss'
 import classNamesBind from 'classnames/bind'
-import classNames from 'classnames'
 import SearchLoader from './SearchLoader/SearchLoader'
 
 const cx = classNamesBind.bind(styles)

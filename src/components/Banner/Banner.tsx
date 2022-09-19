@@ -7,16 +7,11 @@ import classBind from 'classnames/bind'
 import styles from './Banner.module.scss'
 import { Slider } from '@src/models';
 import commonApi from '@src/apis/common.api';
+import { useFetch } from '@src/hooks';
 const cx = classBind.bind(styles)
 const Banner = () => {
-    const [sliderData, setSliderData] = useState<Array<Slider>>([])
-    useEffect(() => {
-        const getSliders = async () => {
-            let resData = await commonApi.getSliders()
-            setSliderData(resData)
-        }
-        getSliders()
-    }, [])
+    const { data: sliderData, isLoading, error } = useFetch<Array<Slider>>(commonApi.getSliders, [])
+
     return (
         <section className={cx("slider-feature")}>
             <Swiper
@@ -30,7 +25,7 @@ const Banner = () => {
                 }
             >
                 {
-                    sliderData.map((value) => {
+                    sliderData?.map((value) => {
                         return (
                             <SwiperSlide key={value.id} className={cx('swiper-slide-container')}>
                                 <div>

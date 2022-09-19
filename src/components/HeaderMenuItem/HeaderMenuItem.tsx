@@ -4,6 +4,7 @@ import styles from './HeaderMenuItem.module.scss'
 import classBind from 'classnames/bind'
 import { Link } from 'react-router-dom'
 import categoryApi from '@src/apis/category.api'
+import { useFetch } from '@src/hooks'
 interface Props {
     menuType: 'cate' | 'list'
 }
@@ -27,37 +28,27 @@ const listData = [
         slug: '#'
     }
 ]
+const dropContentClassObj = {
+    cate: 'cate-drop-grid',
+    list: 'list-drop-grid'
+}
+const apiCallBack = {
+    cate: categoryApi.getAll,
+    list: () => listData
+}
 const HeaderMenuItem = ({ menuType }: Props) => {
-    const [dropData, setDropData] = useState<Array<any>>([])
     const dropContentClass = useMemo(() => {
-        switch (menuType) {
-            case 'cate':
-                return 'cate-drop-grid'
-            case 'list':
-                return 'list-drop-grid'
-        }
+        return dropContentClassObj[menuType]
     }, [menuType])
 
-    useEffect(() => {
-        const getCategories = async () => {
-            let resData = await categoryApi.getAll()
-            setDropData(resData)
-        }
-        switch (menuType) {
-            case 'cate':
-                getCategories()
-                break
-            case 'list':
-                setDropData(listData)
-                break
-        }
-    }, [menuType])
+    const { data: dropData, isLoading, error } = useFetch<Array<any>>(async () => apiCallBack[menuType](), [])
+
     return (
         <>
             <DropDown toggleClassName={cx('drop-toggle')} title='thể loại' dropContentClassName={cx(dropContentClass)} >
 
                 {
-                    dropData.length > 0 && dropData.map((value, _) => {
+                    dropData?.map((value, _) => {
                         return (
                             <Link key={`category-${value.id ?? Math.random()}`} to={`/the-loai/${value.slug}`} className={`${cx("drop-content__items")} `}>
                                 {value.name}

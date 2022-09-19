@@ -2,18 +2,22 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styles from './ChapterItem.module.scss'
 import classNamesBind from 'classnames/bind'
+import { Chapter } from '@src/models'
 const cx = classNamesBind.bind(styles)
-const ChapterItem = () => {
+interface Props {
+    chapter: Chapter
+}
+const ChapterItem = ({ chapter }: Props) => {
     return (
 
         <div className={cx('chapter-items')}>
             <Link to={'#'}>
                 <div className={cx("chapter-items__title")}>
                     <span className={cx("chapter-items__title-number")}>
-                        Chương 1.
+                        Chương {chapter.chapterNumber}
                     </span>
                     <span className={cx("chapter-items__title-text")}>
-                        Sống lại
+                        {chapter.title}
                     </span>
                 </div>
                 <div className={cx("times")}>

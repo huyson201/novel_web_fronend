@@ -20,6 +20,3 @@ export interface Book {
 
 
 
-export interface GetBook extends DefaultApiResponse {
-    data: Book
-}

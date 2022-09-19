@@ -9,6 +9,7 @@ import classNamesBind from 'classnames/bind';
 import classNames from 'classnames';
 import bookApi from '@src/apis/book.api';
 import { Book } from '@src/models';
+import { useFetch } from '@src/hooks';
 const cx = classNamesBind.bind(styles)
 
 export interface Props {
@@ -23,14 +24,8 @@ const slideActions = {
 
 
 const BookSlide = ({ title, type }: Props) => {
-    const [slideData, setSlideData] = useState<Array<Book>>([])
-    useEffect(() => {
-        const fetchData = async () => {
-            let resData = await slideActions[type]()
-            setSlideData(resData)
-        }
-        fetchData()
-    }, [])
+    const { data: slideData, isLoading, error } = useFetch<Array<Book>>(slideActions[type], [])
+
     return (
         <div className={cx('slider-wrapper')}>
             <Link to={'#'}>
@@ -60,7 +55,7 @@ const BookSlide = ({ title, type }: Props) => {
                     <BookCard className={cx('slide-content')} />
                 </SwiperSlide> */}
                 {
-                    slideData.map(value => (
+                    slideData?.map(value => (
                         <SwiperSlide key={value.slug} className={classNames('swiper-slide', cx('swiper-book-card'))}>
                             <BookCard book={value} className={cx('slide-content')} />
                         </SwiperSlide>

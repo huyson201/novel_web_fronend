@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { IoPersonCircleOutline } from 'react-icons/io5'
 import { Link, useNavigate, useSearchParams, useLocation, Location, useParams } from 'react-router-dom'
 import { Button } from '@src/components/Button'
@@ -7,31 +7,30 @@ import Filter from '@src/components/Filter'
 import Pagination from '@src/components/Pagination';
 import FBComment from '@src/components/FBComment'
 import FBLikeShare from '@src/components/FBLikeShare'
-
 import styles from './BookDetail.module.scss'
 import classNamesBind from 'classnames/bind';
 import { Book } from '@src/models'
 import bookApi from '@src/apis/book.api'
+import { useFetch } from '@src/hooks'
+import ListChapter from '@src/components/ListChapter/ListChapter'
 const cx = classNamesBind.bind(styles)
 
 
 const BookDetail = () => {
-    const [book, setBook] = useState<Book>()
+    const { slug = '' } = useParams()
     const navigate = useNavigate()
     const location: Location = useLocation()
-    const { slug } = useParams()
     const chaptersCommentRef = useRef<HTMLDivElement>(null)
+    const { data: book, isLoading, error } = useFetch<Book>(async () => bookApi.getBook(slug), [slug])
 
-    let currentHref = import.meta.env.VITE_HOST_NAME + location.pathname
 
-    const paginationOnchange = (current: any, pageSize: any) => {
-    }
+    const currentURL = useMemo(() => {
+        if (import.meta.env.MODE === 'development') return 'https://tienvuc.xyz/account'
+        return import.meta.env.VITE_HOST_NAME + location.pathname
+    }, [location])
 
-    if (import.meta.env.MODE === 'development') currentHref = 'https://tienvuc.xyz/account'
 
-    useEffect(() => {
-        slug && bookApi.getBook(slug).then(res => setBook(res.data.data))
-    }, [slug])
+
 
     return (
         <div className={cx('detail-page')}>
@@ -44,8 +43,10 @@ const BookDetail = () => {
                         </div>
                         <div className={cx("novel-detail")}>
                             <div className={cx("novel-detail__cates")}>
+
+                                {book?.state === 'full' && <span className='tag tag-green hover-none'>Full</span>}
                                 {
-                                    book?.categories && book.categories.map(value => {
+                                    book?.categories?.map(value => {
                                         return (
                                             <Link key={`cate-${value.slug}`} to={`/the-loai/${value.slug}`}><span className="tag tag-blue">{value.name}</span></Link>
 
@@ -69,7 +70,7 @@ const BookDetail = () => {
                                 <span className={cx("novel-detail__views-number")}>160555</span>
                             </div>
                             <div className={cx("like-share-button")}>
-                                <FBLikeShare dataHref={currentHref} />
+                                <FBLikeShare dataHref={currentURL} />
                             </div>
                             <div className={cx("novel-detail__desc")} dangerouslySetInnerHTML={{ __html: book?.desc || '' }}>
 
@@ -87,38 +88,8 @@ const BookDetail = () => {
                     <div className={cx("list-chapters")} >
                         <div className={cx("list-chapters__title")}>
                             DS Chương
-                            <span className='badge'>5339</span>
                         </div>
-                        <Filter />
-                        <div className={cx("list-chapters__content")}>
-                            <ChapterItem />
-                            <ChapterItem />
-                            <ChapterItem />
-                            <ChapterItem />
-                            <ChapterItem />
-                            <ChapterItem />
-                            <ChapterItem />
-                            <ChapterItem />
-                            <ChapterItem />
-                            <ChapterItem />
-                            <ChapterItem />
-                            <ChapterItem />
-                        </div>
-                        <div className={cx("pagination-wrapper")}>
-                            <Pagination
-                                showLessItems
-                                onChange={paginationOnchange}
-                                disabled={false}
-                                showPrevNextJumpers
-                                defaultPageSize={20}
-                                pageSize={20}
-                                className="pagination"
-                                total={5000}
-                                current={1}
-                                defaultCurrent={1}
-                            />
-
-                        </div>
+                        {book && <ListChapter bookId={book.id} />}
                     </div>
 
                     <div className={cx("comments")}>

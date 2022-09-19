@@ -12,6 +12,7 @@ import FullBookItem from '@src/components/FullBookItem';
 import { Book } from '@src/models/book';
 import bookApi from '@src/apis/book.api';
 import Banner from '@src/components/Banner/Banner';
+import ListFullBook from '@src/components/ListFullBook/ListFullBook';
 
 const cx = classNamesBind.bind(styles)
 const Home = () => {
@@ -110,13 +111,8 @@ const Home = () => {
                                 </h2>
                             </Link>
                         </div>
-                        <div className={cx("list-novels__full-content list-contents")}>
-                            <FullBookItem />
-                            <FullBookItem />
-                            <FullBookItem />
-                            <FullBookItem />
-                            <FullBookItem />
-                        </div>
+
+                        <ListFullBook />
                     </div>
                 </section>
             </div>

@@ -3,7 +3,8 @@ export interface Chapter {
     title: string,
     chapterNumber: number,
     content: string,
-    createdAt: string,
-    updatedAt: string,
+    createdAt?: string,
+    updatedAt?: string,
     bookId: number
 }
+
