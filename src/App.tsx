@@ -36,9 +36,8 @@ function App() {
             })
           } */}
           <Route path=':slug' element={<BookDetail />} />
-          <Route path=':slug/chapter/:chapterId' element={<Chapter />} />
+          <Route path=':slug/:chapter/:chapterId' element={<Chapter />} />
           <Route path='the-loai/:slug' element={<Category />} />
-
           <Route path='account' element={<PrivateRoute><Account /></PrivateRoute>}>
             <Route index element={<Bookcase />} />
             <Route path='profile' element={<Profile />} />

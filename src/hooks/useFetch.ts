@@ -22,6 +22,7 @@ export const useFetch = <T>(callApi: () => CallBackType<T>, dependency?: React.D
 
         }
         fetchData()
+        console.log(`useFetch::---Fetch---------`)
     }, dependency)
     return { data, isLoading, error }
 }

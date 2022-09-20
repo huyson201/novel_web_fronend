@@ -8,3 +8,12 @@ export interface Chapter {
     bookId: number
 }
 
+export interface ChapterResponse {
+    prevChapter: {
+        link?: string
+    },
+    nextChapter: {
+        link?: string
+    },
+    chapter?: Chapter
+}

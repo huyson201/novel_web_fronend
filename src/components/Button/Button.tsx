@@ -16,7 +16,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, Pro
 
 export const LinkButton = ({ title, className, btnType = 'primary', disabled, ...props }: LinkButtonProps) => {
     return (
-        <Link className={classnames(className, { disabled: disabled }, cx(`btn-${btnType}`, 'btn'))} {...props}>
+        <Link className={classnames(className, cx(`btn-${btnType}`, { disabled: disabled }, 'btn'))} {...props}>
             {title || "Button"}
         </Link>
     )

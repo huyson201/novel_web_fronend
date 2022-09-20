@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import styles from './ChapterItem.module.scss'
 import classNamesBind from 'classnames/bind'
 import { Chapter } from '@src/models'
@@ -11,7 +11,7 @@ const ChapterItem = ({ chapter }: Props) => {
     return (
 
         <div className={cx('chapter-items')}>
-            <Link to={'#'}>
+            <Link to={`chapter-${chapter.chapterNumber}/${chapter.id}`}>
                 <div className={cx("chapter-items__title")}>
                     <span className={cx("chapter-items__title-number")}>
                         Chương {chapter.chapterNumber}

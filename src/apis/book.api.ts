@@ -1,3 +1,4 @@
+import { ChapterResponse } from './../models/chapter';
 import { Book, Chapter, PaginationResponse } from '@src/models';
 import axiosClient from "./AxiosConfig"
 
@@ -23,6 +24,9 @@ const bookApi = {
     searchChapters: (bookId: number, params?: { q: string, page?: number, sort?: string, order?: string }) => {
         return axiosClient.get<PaginationResponse<Chapter>>(`/books/${bookId}/chapters/search`, { params: params })
 
+    },
+    getChapter: (bookSlug: string, chapterId: number) => {
+        return axiosClient.get<ChapterResponse>(`/books/slug/${bookSlug}/chapter/${chapterId}`)
     }
 }
 
