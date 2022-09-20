@@ -1,7 +1,7 @@
 export interface Chapter {
     id: number,
     title: string,
-    chapterNumber: number,
+    chapterNumber: string,
     content: string,
     createdAt?: string,
     updatedAt?: string,

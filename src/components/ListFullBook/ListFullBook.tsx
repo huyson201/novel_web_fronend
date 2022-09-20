@@ -8,7 +8,7 @@ import { Book } from '@src/models'
 
 const cx = bindClass.bind(styles)
 const ListFullBook = () => {
-    const { data, isLoading, error } = useFetch<Array<Book>>(bookApi.getFullBooks)
+    const { data, isLoading, error } = useFetch<Array<Book>>(bookApi.getFullBooks, [])
 
     return (
         <div className={cx("list-novels__full-content list-contents")}>

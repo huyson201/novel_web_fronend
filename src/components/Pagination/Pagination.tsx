@@ -15,14 +15,14 @@ const Pagination = ({ className, current, onChange, ...props }: PaginationProps)
     const navigation = useNavigate()
     const [searchParams, setSearchParams] = useSearchParams()
     const [currentPage, setCurrentPage] = useState<number>(() => {
-        if (!searchParams.get('page') && current) return current
+        if (current) return current
         let page: number = parseInt(searchParams.get('page') || '1')
         return page
     })
+
     const handleOnchange = (current: number, pageSize: number) => {
         onChange && onChange(current, pageSize)
         setCurrentPage(current)
-        setSearchParams(`page=${current}`)
     }
     return (
         <RCPagination
@@ -30,8 +30,8 @@ const Pagination = ({ className, current, onChange, ...props }: PaginationProps)
             nextIcon={<VscChevronRight />}
             prevIcon={<VscChevronLeft />}
             {...props}
-            onChange={handleOnchange}
-            current={currentPage}
+            onChange={onChange}
+            current={current}
             jumpNextIcon={"..."}
             jumpPrevIcon={"..."}
 

@@ -19,6 +19,10 @@ const bookApi = {
     },
     getChapters: (bookId: number, params?: { page?: number, sort?: string, order?: string }) => {
         return axiosClient.get<PaginationResponse<Chapter>>(`/books/${bookId}/chapters`, { params: params })
+    },
+    searchChapters: (bookId: number, params?: { q: string, page?: number, sort?: string, order?: string }) => {
+        return axiosClient.get<PaginationResponse<Chapter>>(`/books/${bookId}/chapters/search`, { params: params })
+
     }
 }
 

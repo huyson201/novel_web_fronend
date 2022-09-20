@@ -67,7 +67,7 @@ const BookDetail = () => {
                             </div>
                             <div className={cx("novel-detail__views")}>
                                 <span className={cx("novel-detail__views-title")}>Lượt xem</span>
-                                <span className={cx("novel-detail__views-number")}>160555</span>
+                                <span className={cx("novel-detail__views-number")}>{book?.view}</span>
                             </div>
                             <div className={cx("like-share-button")}>
                                 <FBLikeShare dataHref={currentURL} />

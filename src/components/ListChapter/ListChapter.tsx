@@ -18,7 +18,7 @@ interface Props {
 const ListChapter = ({ bookId }: Props) => {
     const [orderSort, setOrderSort] = useState<Order>('asc')
     const [searchKey, setSearchKey] = useState<string>('')
-
+    const [searchPage, setSearchPage] = useState<number>(1)
     const [searchParams, setSearchParams] = useSearchParams()
 
     const currentPage = useMemo(() => {
@@ -26,8 +26,15 @@ const ListChapter = ({ bookId }: Props) => {
     }, [searchParams])
 
     const { data, isLoading, error } = useFetch<PaginationResponse<Chapter>>(async () => {
+        if (searchKey) return bookApi.searchChapters(bookId, { q: searchKey, page: searchPage, order: orderSort })
         return bookApi.getChapters(bookId, { page: currentPage, sort: 'chapterNumber', order: orderSort })
-    }, [bookId, currentPage, orderSort])
+    }, [bookId, currentPage, orderSort, searchKey, searchPage])
+
+    useEffect(() => {
+        if (!searchKey) {
+            setSearchPage(1)
+        }
+    }, [searchKey])
 
     const handleSort = (order: Order) => {
         setOrderSort(order)
@@ -36,6 +43,11 @@ const ListChapter = ({ bookId }: Props) => {
     const handleSearch = (data: string) => {
         setSearchKey(data)
     }
+    const handlePaginationOnchange = (current: number, pageSize: number) => {
+        if (searchKey) return setSearchPage(current)
+        setSearchParams(`page=${current}`)
+    }
+
     return (
         <div className={cx('list-wrapper')}>
             <Filter onSort={handleSort} onSearch={handleSearch} />
@@ -52,14 +64,14 @@ const ListChapter = ({ bookId }: Props) => {
             {(data && (data.total / data.per_page > 1)) && <div className={cx("pagination-wrapper")}>
                 <Pagination
                     showLessItems
-                    // onChange={paginationOnchange}
+                    onChange={handlePaginationOnchange}
                     disabled={false}
                     showPrevNextJumpers
                     defaultPageSize={10}
                     pageSize={data.per_page}
                     className="pagination"
                     total={data.total}
-                    current={currentPage}
+                    current={searchKey ? searchPage : currentPage}
                     defaultCurrent={1}
                 />
 

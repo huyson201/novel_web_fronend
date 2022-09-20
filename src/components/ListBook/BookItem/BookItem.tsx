@@ -41,10 +41,10 @@ const BookItem = ({ book }: Props) => {
                 {
                     book.chapters && (<div className={cx("chapter")}>
                         <Link to="#" className={cx('chapter__links')}>
-                            <span className={cx('chapter__number')}>Chương {book.chapters[0].chapterNumber}.</span>
-                            <span className={cx('chapter__title')}>{book.chapters[0].title}</span>
+                            <span className={cx('chapter__number')}>Chương {book.chapters[0]?.chapterNumber}.</span>
+                            <span className={cx('chapter__title')}>{book.chapters[0]?.title}</span>
                         </Link>
-                        <p className={cx("times")}>{getTimeToNow(book.chapters[0].updatedAt)}</p>
+                        <p className={cx("times")}>{getTimeToNow(book.chapters[0]?.updatedAt)}</p>
                     </div>)
                 }
 
