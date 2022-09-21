@@ -8,14 +8,18 @@ import { getTimeToNow } from '@src/utils'
 
 const cx = classNamesBind.bind(styles)
 export interface Props {
-    book: Book
+    book: Book,
+    bookRank?: number
 }
-const BookItem = ({ book }: Props) => {
+export const BookItem = ({ book, bookRank }: Props) => {
     return (
         <div className={cx('list-items')}>
             <div className={cx("img-box")}>
                 <Link to={book.slug || '#'}>
                     <img src={book.image} alt="avatar" />
+                    {
+                        bookRank && (<div className={cx('book-rank', `top-${bookRank > 3 ? 'other' : bookRank}`)}>Top {bookRank ?? ''}</div>)
+                    }
                 </Link>
             </div>
             <div className={cx("list-items__contents")}>
@@ -40,9 +44,18 @@ const BookItem = ({ book }: Props) => {
                 </div>
                 {
                     book.chapters && (<div className={cx("chapter")}>
-                        <Link to="#" className={cx('chapter__links')}>
-                            <span className={cx('chapter__number')}>Chương {book.chapters[0]?.chapterNumber}.</span>
-                            <span className={cx('chapter__title')}>{book.chapters[0]?.title}</span>
+                        <Link to={book.chapters.length <= 0 ? '#' : `/${book.slug}/chapter-${book.chapters[0]?.chapterNumber}/${book.chapters[0]?.id}`} className={cx('chapter__links')}>
+
+                            {
+                                book.chapters.length > 0 ? (
+                                    <>
+                                        <span className={cx('chapter__number')}>Chương {book.chapters[0]?.chapterNumber}.</span>
+                                        <span className={cx('chapter__title')}>{book.chapters[0]?.title}</span>
+                                    </>
+                                ) : (
+                                    <span className={cx('chapter__number')}>Đang cập nhật.</span>
+                                )
+                            }
                         </Link>
                         <p className={cx("times")}>{getTimeToNow(book.chapters[0]?.updatedAt)}</p>
                     </div>)
@@ -53,4 +66,3 @@ const BookItem = ({ book }: Props) => {
     )
 }
 
-export default BookItem

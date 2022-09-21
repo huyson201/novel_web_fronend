@@ -5,38 +5,34 @@ import classBind from 'classnames/bind'
 import { Link } from 'react-router-dom'
 import categoryApi from '@src/apis/category.api'
 import { useFetch } from '@src/hooks'
+
 interface Props {
-    menuType: 'cate' | 'list'
+    menuType: 'cate' | 'list',
+    title: string
 }
 
 const cx = classBind.bind(styles)
-const listData = [
+export const menuList = [
     {
-        name: 'Bảng Xếp hạng',
-        slug: '#'
-    },
-    {
-        name: 'Truyện miễn phí',
-        slug: '#'
-    },
-    {
-        name: 'Truyện đã hoàn thành',
-        slug: '#'
+        name: 'Bảng xếp hạng',
+        slug: 'bxh'
     },
     {
         name: 'Truyện mới cập nhật',
-        slug: '#'
-    }
+        slug: 'truyen-moi',
+    },
 ]
 const dropContentClassObj = {
     cate: 'cate-drop-grid',
     list: 'list-drop-grid'
 }
+
 const apiCallBack = {
     cate: categoryApi.getAll,
-    list: () => listData
+    list: () => menuList
 }
-const HeaderMenuItem = ({ menuType }: Props) => {
+
+const HeaderMenuItem = ({ menuType, title }: Props) => {
     const dropContentClass = useMemo(() => {
         return dropContentClassObj[menuType]
     }, [menuType])
@@ -45,7 +41,7 @@ const HeaderMenuItem = ({ menuType }: Props) => {
 
     return (
         <>
-            <DropDown toggleClassName={cx('drop-toggle')} title='thể loại' dropContentClassName={cx(dropContentClass)} >
+            <DropDown toggleClassName={cx('drop-toggle')} title={title} dropContentClassName={cx(dropContentClass)} >
 
                 {
                     dropData?.map((value, _) => {

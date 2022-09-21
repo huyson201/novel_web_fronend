@@ -18,9 +18,12 @@ import Account from '@src/pages/Account';
 import Profile from '@src/pages/Account/Profile';
 import Bookcase from './pages/Bookcase';
 import PrivateRoute from './components/PrivateRoute';
+import { withBooks } from './hooks/withBooks';
+import { menuList } from './utils';
+import Books from './pages/Books';
+import BookRank from './pages/BookRank/BookRank';
 
 function App() {
-
 
   return (
     <div className="App">
@@ -30,14 +33,19 @@ function App() {
         <Route path='/' element={<PageContainer />} >
           <Route index element={<Home />} />
           <Route path='/home' element={<Home />} />
-          {/* {
-            listBookRouters.map((data, index) => {
-              return <Route path={data.routePath} key={index} element={<data.Component title={data.title} />} />
-            })
-          } */}
+
           <Route path=':slug' element={<BookDetail />} />
           <Route path=':slug/:chapter/:chapterId' element={<Chapter />} />
-          <Route path='the-loai/:slug' element={<Category />} />
+          <Route path='the-loai/'>
+            {
+              menuList.map((data, index) => {
+                const ListBookComponent = withBooks(Books, { fetchData: async (page: number) => data.fetchData({ page: page }), title: data.name })
+                return <Route path={data.slug} key={index} element={<ListBookComponent />} />
+              })
+            }
+            <Route path='bxh' element={<BookRank />} />
+            <Route path=':cateSlug' element={<Category />} />
+          </Route>
           <Route path='account' element={<PrivateRoute><Account /></PrivateRoute>}>
             <Route index element={<Bookcase />} />
             <Route path='profile' element={<Profile />} />

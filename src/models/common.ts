@@ -14,8 +14,9 @@ export interface PaginationResponse<T> {
         limit: number
     },
     total: number,
-    per_page: number
-    result: [T]
+    per_page: number,
+    current_page: number,
+    result: Array<T>
 }
 
 export interface Slider {

@@ -43,53 +43,8 @@ const Header = () => {
 
                     <div className={cx('menu', { 'active': showMenu })}>
                         <div className={cx("list-option")}>
-                            <HeaderMenuItem menuType='cate' />
-                            <HeaderMenuItem menuType='list' />
-                            {/* <Dropdown toggleClassName={cx('drop-toggle')} title='thể loại' dropContentClassName={cx('cate-drop-grid')} >
-                                <Link to={'#'} className={`${cx("drop-content__items")} `}>
-                                    Tiên Hiệp
-                                </Link>
-                                {
-                                    categories.length > 0 && categories.map((value, _) => {
-                                        return (
-                                            <Link key={`category-${value.id}`} to={`/the-loai/${value.slug}`} className={`${cx("drop-content__items")} `}>
-                                                {value.name}
-                                            </Link>
-                                        )
-                                    })
-                                }
-                                {/* <Link to={'#'} className={`${cx("drop-content__items")} `}>
-                                    Huyền Huyễn
-                                </Link>
-                                <Link to={'#'} className={`${cx("drop-content__items")} `}>
-                                    Tiên Hiệp
-                                </Link>
-                                <Link to={'#'} className={`${cx("drop-content__items")} `}>
-                                    Tiên Hiệp
-                                </Link>
-                                <Link to={'#'} className={`${cx("drop-content__items")} `}>
-                                    Huyền Huyễn
-                                </Link>
-                                <Link to={'#'} className={`${cx("drop-content__items")} `}>
-                                    Tiên Hiệp
-                                </Link> */}
-                            {/* </Dropdown> */}
-
-                            {/* <Dropdown toggleClassName={cx('drop-toggle')} title='Danh sách' dropContentClassName={cx('list-drop-grid')}>
-                                <Link to={'#'} className={`${cx("drop-content__items")} `}>
-                                    Bảng Xếp hạng
-                                </Link>
-                                <Link to={'#'} className={`${cx("drop-content__items")} `}>
-                                    Truyện miễn phí
-                                </Link>
-                                <Link to={'#'} className={`${cx("drop-content__items")} `}>
-                                    Truyện đã hoàn thành
-                                </Link>
-                                <Link to={'#'} className={`${cx("drop-content__items")} `}>
-                                    Truyện mới cập nhật
-                                </Link>
-
-                            </Dropdown> */}
+                            <HeaderMenuItem title='Thể loại' menuType='cate' />
+                            <HeaderMenuItem title='Danh sách' menuType='list' />
                         </div>
                         {
                             auth.isLogged ?

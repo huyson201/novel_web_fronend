@@ -24,11 +24,27 @@ const Pagination = ({ className, current, onChange, ...props }: PaginationProps)
         onChange && onChange(current, pageSize)
         setCurrentPage(current)
     }
+
+    const itemRender = (current: number, type: "page" | "prev" | "next" | "jump-prev" | "jump-next", element: React.ReactNode) => {
+        switch (type) {
+            case 'prev':
+                return <VscChevronLeft />
+            case 'next':
+                return <VscChevronRight />
+            case 'jump-next':
+            case 'jump-prev':
+                return '...'
+            default:
+                return element
+        }
+
+    }
     return (
         <RCPagination
             className={cx(className, 'pagination')}
             nextIcon={<VscChevronRight />}
             prevIcon={<VscChevronLeft />}
+            itemRender={itemRender}
             {...props}
             onChange={onChange}
             current={current}

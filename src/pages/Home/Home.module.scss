@@ -55,3 +55,12 @@
     }
   }
 }
+.titles {
+  font-size: 1.3rem;
+  & a {
+    color: #000;
+  }
+  & a:hover {
+    color: v.$primaryHover;
+  }
+}

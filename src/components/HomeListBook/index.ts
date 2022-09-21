@@ -1,2 +1,2 @@
 import { BookItem } from './BookItem/BookItem';
-export {default} from './ListBook'
+export { default } from './HomeBookContent'

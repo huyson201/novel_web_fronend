@@ -1,13 +1,13 @@
+import { useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { AxiosResponse } from "axios";
 
-type CallBackType<T> = Promise<AxiosResponse<T, any>> | Promise<T>
+export type CallBackType<T> = Promise<AxiosResponse<T, any>> | Promise<T>
 
 export const useFetch = <T>(callApi: () => CallBackType<T>, dependency?: React.DependencyList) => {
     const [data, setData] = useState<T>()
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [error, setError] = useState<string>()
-
     useEffect(() => {
         const fetchData = async () => {
             setIsLoading(true)
@@ -22,7 +22,6 @@ export const useFetch = <T>(callApi: () => CallBackType<T>, dependency?: React.D
 
         }
         fetchData()
-        console.log(`useFetch::---Fetch---------`)
     }, dependency)
     return { data, isLoading, error }
 }
