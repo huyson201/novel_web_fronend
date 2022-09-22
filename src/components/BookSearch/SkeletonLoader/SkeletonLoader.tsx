@@ -1,9 +1,9 @@
 import React from 'react'
-import styles from './SearchLoader.module.scss'
+import styles from './SkeletonLoader.module.scss'
 import classNamesBind from 'classnames/bind'
 
 const cx = classNamesBind.bind(styles)
-const SearchLoader = () => {
+const SkeletonLoader = () => {
     return (
         <div className={cx('searching-item')}>
             <div className={cx("searching-item__img")}>
@@ -17,4 +17,4 @@ const SearchLoader = () => {
     )
 }
 
-export default SearchLoader
+export default SkeletonLoader

@@ -47,17 +47,18 @@
   top: calc(100% + 5px);
   background-color: vars.$whiteColor;
   width: 100%;
+  overflow-y: scroll;
   border-radius: 8px;
   overflow: hidden;
   z-index: 999;
   display: none;
-  &:not(.s-waiting) {
-    & > .search-loader {
-      display: none;
-    }
-    & > .search-result {
-      display: block;
-    }
+}
+.search-bar__result:not(.search-bar--loading) {
+  & > .loading-wrapper {
+    display: none;
+  }
+  & > .search-result {
+    display: block;
   }
 }
 .search-result {
@@ -66,4 +67,16 @@
   color: #4a4a4a;
   font-weight: 400;
   display: none;
+  max-height: 700px;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: vars.$grayHover;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 8px;
+  }
 }

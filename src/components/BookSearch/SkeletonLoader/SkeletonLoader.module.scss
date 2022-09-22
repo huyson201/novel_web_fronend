@@ -8,6 +8,7 @@
   flex-wrap: nowrap;
   position: relative;
   overflow: hidden;
+  border-bottom: 1px solid vars.$separatorColor;
 
   &__img {
     width: 65px;
@@ -15,7 +16,7 @@
     & > .img-mockup {
       width: 100%;
       aspect-ratio: 4 / 5;
-      background: rgba($color: #000000, $alpha: 0.2);
+      background: #ddd;
       border-radius: 6px;
     }
   }
@@ -39,35 +40,36 @@
     & .content-mockup {
       height: 16px;
       border-radius: 20px;
-      background: rgba($color: #000000, $alpha: 0.2);
+      background: #ddd;
     }
   }
 
   &::before {
     content: "";
     position: absolute;
-    width: 100%;
+    width: 50%;
     height: 100%;
     top: 0;
-    left: -100%;
+    left: 0;
     background: linear-gradient(
       to right,
-      rgba(255, 255, 255, 0.3) 100%,
-      transparent 0%
+      transparent,
+      rgba(255, 255, 255, 0.5) 50%,
+      transparent
     );
     animation: slideX 2s linear infinite forwards;
-    opacity: 0;
+    // opacity: 0;
   }
 
   @keyframes slideX {
     from {
-      left: -100%;
-      opacity: 0;
+      left: -50%;
+      // opacity: 0;
     }
 
     to {
-      left: 0;
-      opacity: 1;
+      left: 50%;
+      // opacity: 1;
     }
   }
 }

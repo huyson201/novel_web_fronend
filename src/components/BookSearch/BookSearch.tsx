@@ -1,9 +1,12 @@
 import React, { useRef, ChangeEvent, useState, useEffect } from 'react'
 import { IoSearch } from 'react-icons/io5'
-import { useDebounce } from '@src/hooks'
+import { useDebounce, useFetch } from '@src/hooks'
 import styles from './BookSearch.module.scss'
 import classNamesBind from 'classnames/bind'
-import SearchLoader from './SearchLoader/SearchLoader'
+import SkeletonLoader from './SkeletonLoader/SkeletonLoader'
+import { Book } from '@src/models'
+import bookApi from '@src/apis/book.api'
+import SearchResultItem from './SearchResultItem/SearchResultItem'
 
 const cx = classNamesBind.bind(styles)
 interface Props {
@@ -11,24 +14,24 @@ interface Props {
 }
 
 const SearchBar = ({ ...props }: Props) => {
-    const [searchData, setSearchData] = useState<any>(null)
     const [key, setKey] = useState<string>('')
-    const [focus, setFocus] = useState<boolean>(false)
-    const [waiting, setWaiting] = useState<boolean>(false)
-    const [emptyResult, setEmptyResult] = useState<boolean>(false)
-    const debounceValue = useDebounce<string>(key, 600);
+    const [searching, setSearching] = useState<boolean>(false)
+    const debounceValue = useDebounce(key, 600);
 
+    // fetch data
+    const { data: books, isLoading, error } = useFetch(async () => {
+        setSearching(false)
+
+        if (!key) return
+        return bookApi.searchBook(key)
+    }, [debounceValue])
 
     const handleOnchange = (e: ChangeEvent<HTMLInputElement>) => {
-        setWaiting(true)
+        setSearching(true)
         let value = e.currentTarget.value
         setKey(value)
     }
 
-
-    useEffect(() => {
-        setWaiting(false)
-    }, [debounceValue])
 
     return (
         <div className={cx('search-bar')}>
@@ -37,12 +40,22 @@ const SearchBar = ({ ...props }: Props) => {
                 <input {...props} onChange={handleOnchange} type="search" autoComplete='off' />
             </div>
 
-            <div className={cx('search-bar__result', { "s-waiting": waiting })}>
-                <div className={cx('search-result')}>Nhập từ khóa bất kỳ để tìm kiếm truyện.</div>
-                <div className={cx("search-loader")}>
-                    <SearchLoader />
-                    <div className='separator'></div>
-                    <SearchLoader />
+            <div className={cx('search-bar__result', { "search-bar--loading": searching ?? isLoading })}>
+
+                <div className={cx('search-result')}>
+                    {!books && 'Nhập từ khóa để tìm kiếm.'}
+                    {books && books.length === 0 && 'Không tìm thấy kết quả.'}
+                    {
+                        books && books.length > 0 && books.map(book => {
+                            return (
+                                <SearchResultItem key={book.slug} book={book} />
+                            )
+                        })
+                    }
+                </div>
+                <div className={cx("loading-wrapper")}>
+                    <SkeletonLoader />
+                    <SkeletonLoader />
                 </div>
             </div>
 

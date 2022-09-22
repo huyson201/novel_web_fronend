@@ -9,6 +9,10 @@ const bookApi = {
     getBook: (slug: string) => {
         return axiosClient.get<Book>(`/books/slug/${slug}`)
     },
+    searchBook: (searchKey: string) => {
+        return axiosClient.get<Array<Book>>('/books/search', { params: { q: searchKey } })
+
+    },
     getRecommendBooks: () => {
         return axiosClient.get<Array<Book>>('/books/recommends')
     },
