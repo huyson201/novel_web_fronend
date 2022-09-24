@@ -1,4 +1,4 @@
-@use "../../styles" as v;
+@use "../../styles" as *;
 
 .footer {
   padding: 40px 0;
@@ -6,12 +6,15 @@
 
 .footer__logo {
   font-size: 1.5rem;
-  color: v.$primaryColor;
+  color: $primaryColor;
   font-weight: 700;
 }
 .footer__content {
   font-size: 14px;
   text-align: justify;
+  @include breakpoint-down(md) {
+    text-align: center;
+  }
 }
 .footer__app-links {
   margin-top: 8px;
@@ -21,28 +24,31 @@
     object-fit: cover;
     margin: 0 4px;
   }
+  @include breakpoint-down(xxs) {
+    text-align: center;
+  }
 }
 
 .footer__web-rule {
   margin-top: 4px;
 
-  @include v.breakpoint-down(xxs) {
+  @include breakpoint-down(xxs) {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
   }
   & a {
-    color: v.$primaryColor;
+    color: $primaryColor;
     transition: all 0.3s;
     font-weight: 400;
     margin: 0 12px;
 
     &:hover {
-      color: v.$textColor;
+      color: $textColor;
     }
   }
 }
 .container {
-  @include v.centerStyle;
+  @include centerStyle;
   flex-direction: column;
 }

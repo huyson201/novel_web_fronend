@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper';
 import swiperOnChangePagination from '@src/Helper/swiperOnChangePagination';
@@ -28,11 +28,14 @@ const Banner = () => {
                     sliderData?.map((value) => {
                         return (
                             <SwiperSlide key={value.id} className={cx('swiper-slide-container')}>
-                                <div>
-                                    <Link to={value.book.slug}>
-                                        <img src={value.bannerImg} alt="slider-img" />
-                                    </Link>
-                                </div>
+                                <Suspense  >
+                                    <div>
+                                        <Link to={value.book.slug}>
+                                            <img src={value.bannerImg} alt="slider-img" />
+                                        </Link>
+                                    </div>
+                                </Suspense>
+
                             </SwiperSlide>
                         )
                     })
@@ -43,5 +46,6 @@ const Banner = () => {
         </section>
     )
 }
+
 
 export default Banner

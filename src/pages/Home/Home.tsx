@@ -1,27 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
-import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper';
-import swiperOnChangePagination from '@src/Helper/swiperOnChangePagination';
+import SwiperCore, { Autoplay } from 'swiper';
 import styles from './Home.module.scss'
 import classNamesBind from 'classnames/bind'
 import BookSearch from '@src/components/BookSearch';
 import BookSlide from '@src/components/BookSlide';
 import HomeListBook from '@src/components/HomeListBook';
-import FullBookItem from '@src/components/FullBookItem';
-import { Book } from '@src/models/book';
-import bookApi from '@src/apis/book.api';
 import Banner from '@src/components/Banner/Banner';
 import ListFullBook from '@src/components/ListFullBook/ListFullBook';
 
 const cx = classNamesBind.bind(styles)
 const Home = () => {
     SwiperCore.use([Autoplay]);
-    const [books, setBooks] = useState<Array<Book>>([])
 
-    useEffect(() => {
-        // bookApi.getPagination(1).then(response => setBooks(response.data.data.result))
-    }, [])
     return (
         <div className={cx('home-page')}>
             {/* main content */}

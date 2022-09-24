@@ -1,0 +1,42 @@
+@use "@src/styles" as *;
+
+.page-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.page-wrapper img {
+  max-width: 600px;
+  width: 100%;
+}
+.page-content {
+  text-align: center;
+}
+
+.page-title {
+  font-size: 2.2rem;
+  color: $textColor;
+  @include breakpoint-down(md) {
+    font-size: 2rem;
+  }
+
+  @include breakpoint-down(sm) {
+    font-size: 1.8rem;
+  }
+  @include breakpoint-down(sm) {
+    font-size: 1.6rem;
+  }
+  @include breakpoint-down(xs) {
+    font-size: 1.4rem;
+  }
+}
+.home-btn {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 8px 12px;
+  background-color: $blueColor;
+  color: $whiteColor;
+  border-radius: 4px;
+  text-transform: capitalize;
+}

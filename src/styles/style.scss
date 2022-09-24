@@ -203,3 +203,7 @@ a:-webkit-any-link:focus-visible {
 .rc-pagination-options {
   display: none !important;
 }
+.rc-pagination-disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}

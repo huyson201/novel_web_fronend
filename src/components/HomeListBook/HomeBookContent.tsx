@@ -5,7 +5,6 @@ import bookApi from '@src/apis/book.api'
 import { useFetch } from '@src/hooks'
 import { PaginationResponse } from '@src/models'
 
-
 export interface Props {
 }
 const HomeBookContent = ({ }: Props) => {

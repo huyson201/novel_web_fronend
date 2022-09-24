@@ -17,6 +17,7 @@ interface Props {
 const Dropdown = ({ title, children, className, dropContentClassName, toggleClassName }: Props) => {
     const [active, setActive] = useState<boolean>(false)
     const btnRef = useRef<HTMLDivElement>(null)
+    const wrapperRef = useRef<HTMLDivElement>(null)
     const handleClick = (e: MouseEvent) => {
         setActive(!active)
     }
@@ -28,19 +29,19 @@ const Dropdown = ({ title, children, className, dropContentClassName, toggleClas
             }
         }
 
-        window.addEventListener('click', closeDropdown)
+        document.addEventListener('click', closeDropdown)
 
         return () => {
-            window.removeEventListener('click', closeDropdown)
+            document.removeEventListener('click', closeDropdown)
         }
     }, [])
     return (
-        <div className={`${cx("drop-down")} ${className || ''}`}>
-            <div ref={btnRef} className={classnames(cx('drop-toggle-btn', { 'active': active }), toggleClassName)} onClick={handleClick}>
+        <div className={`${cx("drop-down")} ${className || ''}`} ref={wrapperRef}>
+            <div ref={btnRef} className={cx('drop-toggle-btn', { 'active': active }, toggleClassName)} onClick={handleClick}>
                 {title}
                 <IoChevronDown className={cx('arrow-down')} />
             </div>
-            <div className={classnames(cx('drop-content'), dropContentClassName)}>
+            <div className={cx('drop-content', dropContentClassName)}>
                 {children && children}
             </div>
         </div>

@@ -9,10 +9,11 @@ import { useSearchParams } from 'react-router-dom'
 const cx = classNamesBind.bind(styles)
 export interface BooksProps {
     title?: string,
-    data?: PaginationResponse<Book>
+    data?: PaginationResponse<Book>,
+    showRank?: boolean
     onPageChange?: () => void
 }
-const Books = ({ title, data }: BooksProps) => {
+const Books = ({ title, data, showRank }: BooksProps) => {
     const [searchParams, setSearchParams] = useSearchParams()
     const handlePaginationOnchange = (current: number, pageSize: number) => {
         setSearchParams(`page=${current}`)
@@ -21,28 +22,28 @@ const Books = ({ title, data }: BooksProps) => {
             behavior: 'smooth'
         })
     }
+
+
     return (
-        <div className={cx("list-book-page")}>
-            <div className={cx('list-book')}>
-                <div className="wrapper">
-                    <div className={cx("list-book__title")}>
-                        <h2>{title || 'List'}</h2>
-                    </div>
-                    <div className={cx('list_books')}>
-                        {
-                            data?.result.map((value) => {
-                                return (
-                                    <BookItem book={value} key={`key-${value.slug}`} />
-                                )
-                            })
-                        }
-                    </div>
-                    <div className={cx("pagination-wrapper")}>
-                        <Pagination current={parseInt(searchParams.get('page') || '1')} onChange={handlePaginationOnchange} total={data?.total} pageSize={data?.per_page ?? 0} defaultPageSize={10} />
-                    </div>
-                </div>
+        <>
+            <div className={cx("list-book__title")}>
+                <h2>{title ?? 'List'}</h2>
             </div>
-        </div>
+            <div className={cx('list_books')}>
+                {
+                    data?.result.map((value, index) => {
+                        return (
+                            <BookItem {...(showRank && { bookRank: index + 1 })} book={value} key={`key-${value.slug}`} />
+                        )
+                    })
+                }
+            </div>
+            {
+                data && data?.total / data?.per_page > 1 && (<div className={cx("pagination-wrapper")}>
+                    <Pagination current={parseInt(searchParams.get('page') || '1')} onChange={handlePaginationOnchange} total={data?.total} pageSize={data?.per_page ?? 0} defaultPageSize={10} />
+                </div>)
+            }
+        </>
     )
 }
 

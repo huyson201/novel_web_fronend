@@ -13,22 +13,22 @@ import { Book } from '@src/models'
 import bookApi from '@src/apis/book.api'
 import { useFetch } from '@src/hooks'
 import ListChapter from '@src/components/ListChapter/ListChapter'
+import NotMatch from '../NotMatch'
 const cx = classNamesBind.bind(styles)
 
 
 const BookDetail = () => {
     const { slug = '' } = useParams()
-    const navigate = useNavigate()
     const location: Location = useLocation()
     const chaptersCommentRef = useRef<HTMLDivElement>(null)
     const { data: book, isLoading, error } = useFetch<Book>(async () => bookApi.getBook(slug), [slug])
-
-
     const currentURL = useMemo(() => {
         if (import.meta.env.MODE === 'development') return 'https://tienvuc.xyz/account'
         return import.meta.env.VITE_HOST_NAME + location.pathname
     }, [location])
 
+
+    if ((!book && !isLoading)) return <NotMatch />
 
 
 

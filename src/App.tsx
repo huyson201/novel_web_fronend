@@ -22,6 +22,9 @@ import { withBooks } from './hooks/withBooks';
 import { menuList } from './utils';
 import Books from './pages/Books';
 import BookRank from './pages/BookRank/BookRank';
+import NotMatch from './pages/NotMatch';
+import router, { RouterType } from './Routers';
+import CateWrapper from './components/CateWrapper';
 
 function App() {
 
@@ -36,7 +39,7 @@ function App() {
 
           <Route path=':slug' element={<BookDetail />} />
           <Route path=':slug/:chapter/:chapterId' element={<Chapter />} />
-          <Route path='the-loai/'>
+          <Route path='the-loai/' element={<CateWrapper />}>
             {
               menuList.map((data, index) => {
                 const ListBookComponent = withBooks(Books, { fetchData: async (page: number) => data.fetchData({ page: page }), title: data.name })
@@ -50,10 +53,30 @@ function App() {
             <Route index element={<Bookcase />} />
             <Route path='profile' element={<Profile />} />
           </Route>
+          <Route path='*' element={<NotMatch title='Trang này không tồn tại hoặc bị xóa' />} />
         </Route>
       </Routes>
     </div>
   )
 }
 
+
+const routes = (routers: Array<RouterType>, index?: number) => {
+  if (!routers || routers.length === 0) return
+  return routers.map((route, index) => {
+    if (!route.subs) {
+      if (route.indexRoute) return <Route key={`${index}`} index element={<route.Component />} />
+      return (<Route key={route.path} path={route.path} element={<route.Component />} />)
+    }
+
+    return (
+      <Route path={route.path} element={<route.Component />}>
+        {routes(route.subs)}
+      </Route>
+    )
+  })
+
+
+
+}
 export default App
