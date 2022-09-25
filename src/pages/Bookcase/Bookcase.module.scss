@@ -1,7 +1,9 @@
+@use "@src/styles" as *;
 .book-case {
   &__title {
     margin-bottom: 8px;
-    padding: 8px;
+    font-size: 2rem;
+    color: $textColor;
   }
   &__list {
     display: flex;

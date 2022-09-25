@@ -18,5 +18,11 @@ export interface Book {
     view: number
 }
 
+export interface BookCase {
+    book: Book,
+    chapter: Chapter
+}
+
+
 
 

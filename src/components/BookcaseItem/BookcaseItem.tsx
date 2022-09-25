@@ -3,25 +3,29 @@ import { IoCloseOutline } from 'react-icons/io5'
 import { Link } from 'react-router-dom'
 import styles from './BookcaseItem.module.scss'
 import classNamesBind from 'classnames/bind'
+import { BookCase } from '@src/models'
 const cx = classNamesBind.bind(styles)
-const BookcaseItem = () => {
+interface BookCaseItemProps {
+    bookcase: BookCase
+}
+const BookcaseItem = ({ bookcase }: BookCaseItemProps) => {
     return (
 
         <div className={cx("book-items")}>
             <div className={cx("book-items__container")}>
                 <div className={cx("book-items__img")}>
-                    <Link to={'#'}> <img src="https://cdn.tienvuc.xyz/media/books/1490a227-5615-41c8-a37c-ac8835d9bba3-a51a85.jpeg" alt="book image" /></Link>
+                    <Link to={`/${bookcase.book.slug}`}> <img src={bookcase.book.image} alt="book image" /></Link>
                 </div>
                 <div className={cx("book-items__title")}>
-                    <Link to={'#'}>
+                    <Link to={`/${bookcase.book.slug}`}>
                         <h3 >
-                            Bắt Đầu Quá Mạnh Làm Sao Bây Giờ (Dịch)
+                            {bookcase.book.title}
                         </h3>
                     </Link>
                 </div>
                 <div className={cx("book-items__chapter")}>
-                    <Link to={'#'}>
-                        Đọc tiếp chương 23
+                    <Link to={`/${bookcase.book.slug}/chapter-${bookcase.chapter.chapterNumber}/${bookcase.chapter.id}`}>
+                        Đọc tiếp chương {bookcase.chapter.chapterNumber}
                     </Link>
                 </div>
                 <button className={cx('btn', 'remove-btn')}><IoCloseOutline /></button>

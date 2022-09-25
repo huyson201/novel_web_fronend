@@ -3,6 +3,7 @@
   width: calc(100% / 4);
   padding: 12px;
   height: 100%;
+
   @include vars.breakpoint-down(md) {
     width: calc(100% / 2);
     padding: 8px;
@@ -18,6 +19,8 @@
     flex-direction: column;
     width: 100%;
     position: relative;
+    border-radius: 6px;
+    overflow: hidden;
   }
 
   &__img {
@@ -38,12 +41,15 @@
   &__title {
     padding: 8px;
     font-size: 0.9rem;
+
     @media (min-width: 769px) and (max-width: 1204px) {
       font-size: 0.7rem;
     }
 
     & > a {
       transition: color 0.3s;
+      color: vars.$textColor;
+
       &:hover {
         color: vars.$primaryColor;
       }

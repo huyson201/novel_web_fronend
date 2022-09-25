@@ -16,7 +16,6 @@
   @include vars.breakpoint-down(md) {
     flex: 1;
   }
-  height: 100vh;
   &__head {
     text-align: center;
     & .user-name {
@@ -45,6 +44,7 @@
     list-style: none;
     padding: 24px 0;
     @include vars.breakpoint-down(md) {
+      border-top: 1px solid vars.$separatorColor;
       position: fixed;
       bottom: 0;
       left: 0;

@@ -1,4 +1,4 @@
-import { RegisterInput, LoginInput, Auth } from '@src/models';
+import { RegisterInput, LoginInput, Auth, BookCase } from '@src/models';
 import axiosClient from './AxiosConfig'
 
 const authApi = {
@@ -10,6 +10,12 @@ const authApi = {
     },
     logout: () => {
         return axiosClient.post('auth/logout')
+    },
+    getInFo: () => {
+        return axiosClient.get<Auth>('auth/me')
+    },
+    getBookcase: () => {
+        return axiosClient.get<Array<BookCase>>('auth/me/bookcase')
     }
 }
 

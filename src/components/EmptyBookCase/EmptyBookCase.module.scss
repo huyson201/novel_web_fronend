@@ -1,0 +1,24 @@
+@use "@src/styles" as *;
+.case-wrapper {
+  background-color: $whiteColor;
+  border-radius: 6px;
+  box-shadow: -1px 1px 4px $separatorColor;
+  @include centerStyle;
+  flex-direction: column;
+  width: 100%;
+  padding: 32px 12px;
+}
+.case-wrapper img {
+  max-width: 400px;
+  width: 100%;
+}
+.case-wrapper :where(.case-title, .case-content) {
+  color: $textColor;
+  text-align: center;
+}
+.case-wrapper .case-title {
+  margin-bottom: 8px;
+}
+.case-wrapper .case-content {
+  font-size: 1.2rem;
+}

@@ -17,12 +17,12 @@ interface Props {
 const Dropdown = ({ title, children, className, dropContentClassName, toggleClassName }: Props) => {
     const [active, setActive] = useState<boolean>(false)
     const btnRef = useRef<HTMLDivElement>(null)
-    const wrapperRef = useRef<HTMLDivElement>(null)
     const handleClick = (e: MouseEvent) => {
-        setActive(!active)
+        setActive((prev) => !prev)
     }
     useEffect(() => {
         const closeDropdown = (e: any) => {
+            if (!btnRef.current?.classList.contains(cx('active'))) return
             if (!(e.target === btnRef.current)) {
                 setActive(false)
                 return
@@ -36,7 +36,7 @@ const Dropdown = ({ title, children, className, dropContentClassName, toggleClas
         }
     }, [])
     return (
-        <div className={`${cx("drop-down")} ${className || ''}`} ref={wrapperRef}>
+        <div className={`${cx("drop-down")} ${className || ''}`} >
             <div ref={btnRef} className={cx('drop-toggle-btn', { 'active': active }, toggleClassName)} onClick={handleClick}>
                 {title}
                 <IoChevronDown className={cx('arrow-down')} />

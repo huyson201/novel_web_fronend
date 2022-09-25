@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import formatCurrency from '../../Helper/currencyFormat'
 import currencyIcon from '@src/assets/icons/dollar-circle.svg'
@@ -6,6 +6,9 @@ import { MdOutlineBookmarkAdded } from 'react-icons/md'
 import { IoPersonOutline } from 'react-icons/io5'
 import styles from './Account.module.scss'
 import classNamesBind from 'classnames/bind'
+import { useAppDispatch, useAppSelector } from '@src/redux'
+import { fetchAuth, fetchAuthFail, fetchAuthSuccess } from '@src/redux/features/authSlice'
+import authApi from '@src/apis/auth.api'
 const cx = classNamesBind.bind(styles)
 
 type SidebarItem = {
@@ -28,6 +31,22 @@ const sideBarItems: Array<SidebarItem> = [
 ]
 
 const Account = () => {
+    const auth = useAppSelector(state => state.auth)
+    const dispatch = useAppDispatch()
+    useEffect(() => {
+        if (auth.authProfile) return
+        dispatch(fetchAuth())
+        const fetchData = async () => {
+            try {
+                let resData = await authApi.getInFo()
+                console.log(resData)
+                dispatch(fetchAuthSuccess(resData))
+            } catch (error: any) {
+                dispatch(fetchAuthFail())
+            }
+        }
+        fetchData()
+    }, [])
 
     return (
         <div className={cx('account-page')}>
@@ -35,14 +54,8 @@ const Account = () => {
                 <section>
                     <div className={cx("side-bar")}>
                         <div className={cx("side-bar__head")}>
-                            <div className={cx("user-name")}>Sontk147vn</div>
-                            <div className={cx("user-email")}>huyson@gmail.com</div>
-                            <div className={cx("user-coins")}>
-                                <img src={currencyIcon} alt="dollar icon" />
-                                <span className={cx("coins")}>
-                                    0 Xu
-                                </span>
-                            </div>
+                            <div className={cx("user-name")}>{auth.authProfile?.name}</div>
+                            <div className={cx("user-email")}>{auth.authProfile?.email}</div>
                         </div>
                         <ul className={cx("side-bar__menu")}>
                             {
