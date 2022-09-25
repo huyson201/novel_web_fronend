@@ -23,6 +23,10 @@ export interface BookCase {
     chapter: Chapter
 }
 
-
+export interface DeleteBookCaseResponse {
+    bookId: number,
+    userId: number,
+    chapterId: number
+}
 
 

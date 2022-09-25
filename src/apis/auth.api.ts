@@ -1,4 +1,4 @@
-import { RegisterInput, LoginInput, Auth, BookCase } from '@src/models';
+import { RegisterInput, LoginInput, Auth, BookCase, DeleteBookCaseResponse } from '@src/models';
 import axiosClient from './AxiosConfig'
 
 const authApi = {
@@ -16,6 +16,10 @@ const authApi = {
     },
     getBookcase: () => {
         return axiosClient.get<Array<BookCase>>('auth/me/bookcase')
+    },
+    deleteBookcase: (bookId: number) => {
+        return axiosClient.delete<DeleteBookCaseResponse>('auth/me/bookcase/delete', { params: { book_id: bookId } })
+
     }
 }
 

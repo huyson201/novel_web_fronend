@@ -2,15 +2,10 @@
 
 .toolbar {
   position: fixed;
-  display: flex;
-  flex-direction: column;
-  padding: 8px;
-  background: vars.$whiteColor;
-  border-radius: 6px;
+  transform: translateY(-50%);
   left: 0;
   top: 50%;
-  transform: translateY(-50%);
-  box-shadow: 0px 0px 3px 1px rgba($color: #000000, $alpha: 0.1);
+
   @include vars.breakpoint-down(md) {
     top: auto;
     bottom: 0;
@@ -25,6 +20,99 @@
     }
   }
 }
+
+.toolbar-controls {
+  display: flex;
+  flex-direction: column;
+  display: none;
+  padding: 8px;
+}
+.setting-controls button {
+  outline: none;
+  border: none;
+  background: transparent;
+}
+.setting-controls,
+.toolbar-controls {
+  box-shadow: 0px 0px 3px 1px rgba($color: #000000, $alpha: 0.1);
+  background: vars.$whiteColor;
+  border-radius: 6px;
+}
+
+.setting-controls {
+  padding: 12px 16px;
+}
+.control-header,
+.controls-area {
+  display: flex;
+  align-items: center;
+}
+.close-settings-btn {
+  @include vars.centerStyle;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  transition: background 0.25s;
+  border-radius: 4px;
+  margin-right: 6px;
+  &:hover {
+    background-color: vars.$grayHover;
+  }
+  svg {
+    font-size: 24px;
+  }
+}
+
+.header-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: vars.$textColor;
+  margin-bottom: 6px;
+}
+.controls-area {
+  justify-content: space-between;
+}
+.control-title {
+  font-size: 20px;
+  color: vars.$textColor;
+  font-weight: 800;
+  margin-right: 32px;
+}
+.control-options {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.options {
+  width: 42px;
+  height: 42px;
+  cursor: pointer;
+  @include vars.centerStyle;
+}
+button.tool-theme {
+  font-size: 20px;
+  border-radius: 50%;
+  border: 3px solid #d5d5d5;
+}
+button.tool-theme.active {
+  border-color: vars.$blueColor;
+}
+button.tool-theme.theme-light {
+  background-color: vars.$whiteColor;
+}
+button.tool-theme.theme-dark {
+  background-color: #000;
+  color: vars.$whiteColor;
+}
+button.tool-theme.theme-book {
+  background-color: #cead76;
+}
+
+.font-size-icon {
+  $size: 24px;
+  width: $size;
+  height: $size;
+}
 .toolbar__btn {
   font-size: 1.6rem;
   @include vars.centerStyle;
@@ -32,6 +120,10 @@
   transition: all 0.3s;
   height: 50px;
   color: vars.$textColor;
+  border: none;
+  background: transparent;
+  outline: none;
+  cursor: pointer;
   &:hover {
     background: vars.$grayColor;
   }

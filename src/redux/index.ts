@@ -3,6 +3,8 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import authSlice from './features/authSlice'
+import bookcaseSlice from './features/bookcase'
+import bookSlice from './features/bookSlice'
 
 const persistConfig = {
     key: 'root',
@@ -14,6 +16,8 @@ const persistedReducer = persistReducer(persistConfig, authSlice.reducer)
 
 const reducer = combineReducers({
     auth: persistedReducer,
+    bookcase: bookcaseSlice.reducer,
+    book: bookSlice.reducer
 })
 
 const store = configureStore({

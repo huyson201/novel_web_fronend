@@ -1,52 +1,63 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { IoPersonCircleOutline } from 'react-icons/io5'
-import { Link, useNavigate, useSearchParams, useLocation, Location, useParams } from 'react-router-dom'
+import { Link, useLocation, Location, useParams } from 'react-router-dom'
 import { Button } from '@src/components/Button'
-import ChapterItem from '@src/components/ChapterItem'
-import Filter from '@src/components/Filter'
-import Pagination from '@src/components/Pagination';
 import FBComment from '@src/components/FBComment'
 import FBLikeShare from '@src/components/FBLikeShare'
 import styles from './BookDetail.module.scss'
 import classNamesBind from 'classnames/bind';
-import { Book } from '@src/models'
 import bookApi from '@src/apis/book.api'
-import { useFetch } from '@src/hooks'
 import ListChapter from '@src/components/ListChapter/ListChapter'
 import NotMatch from '../NotMatch'
+import { useAppDispatch, useAppSelector } from '@src/redux'
+import { fetchBook, fetchBookFail, fetchBookSuccess } from '@src/redux/features/bookSlice'
 const cx = classNamesBind.bind(styles)
 
 
 const BookDetail = () => {
+    const dispatch = useAppDispatch()
+    const bookState = useAppSelector(state => state.book)
     const { slug = '' } = useParams()
     const location: Location = useLocation()
     const chaptersCommentRef = useRef<HTMLDivElement>(null)
-    const { data: book, isLoading, error } = useFetch<Book>(async () => bookApi.getBook(slug), [slug])
+
     const currentURL = useMemo(() => {
         if (import.meta.env.MODE === 'development') return 'https://tienvuc.xyz/account'
         return import.meta.env.VITE_HOST_NAME + location.pathname
     }, [location])
 
+    useEffect(() => {
+        dispatch(fetchBook())
+        const fetchData = async () => {
+            try {
+                let data = await bookApi.getBook(slug)
+                dispatch(fetchBookSuccess(data))
+            } catch (error) {
+                console.log(error)
+                dispatch(fetchBookFail())
+            }
 
-    if ((!book && !isLoading)) return <NotMatch />
+        }
+        fetchData()
+    }, [slug])
 
-
+    if ((!bookState.book && !bookState.loading)) return <NotMatch />
 
     return (
         <div className={cx('detail-page')}>
             <div className={cx("detail-hero")}>
-                <div className={cx("bg-blur")} style={{ 'background': `url(${book?.image})` }}></div>
+                <div className={cx("bg-blur")} style={{ 'background': `url(${bookState.book?.image})` }}></div>
                 <div className={cx("detail-hero__content")}>
                     <div className="wrapper">
                         <div className={cx("novel-avatar")}>
-                            <img src={book?.image} alt="book-avatar" />
+                            <img src={bookState.book?.image} alt="book-avatar" />
                         </div>
                         <div className={cx("novel-detail")}>
                             <div className={cx("novel-detail__cates")}>
 
-                                {book?.state === 'full' && <span className='tag tag-green hover-none'>Full</span>}
+                                {bookState.book?.state === 'full' && <span className='tag tag-green hover-none'>Full</span>}
                                 {
-                                    book?.categories?.map(value => {
+                                    bookState.book?.categories?.map(value => {
                                         return (
                                             <Link key={`cate-${value.slug}`} to={`/the-loai/${value.slug}`}><span className="tag tag-blue">{value.name}</span></Link>
 
@@ -55,24 +66,24 @@ const BookDetail = () => {
                                 }
                             </div>
                             <h2 className={cx("novel-detail__title")}>
-                                {book?.title}
+                                {bookState.book?.title}
                             </h2>
-                            <div className={cx("novel-detail__author")}>Tác giả: {book?.author}</div>
+                            <div className={cx("novel-detail__author")}>Tác giả: {bookState.book?.author}</div>
                             <div className={cx("novel-detail__translator")}>
                                 <span className={cx('novel-detail__translator-title')}>Dịch giả:</span>
                                 <Link to={'#'}>
                                     <IoPersonCircleOutline className={cx('novel-detail__translator-icon')} />
-                                    <span className={cx('novel-detail__translator-name')}>{book?.translator}</span>
+                                    <span className={cx('novel-detail__translator-name')}>{bookState.book?.translator}</span>
                                 </Link>
                             </div>
                             <div className={cx("novel-detail__views")}>
                                 <span className={cx("novel-detail__views-title")}>Lượt xem</span>
-                                <span className={cx("novel-detail__views-number")}>{book?.view}</span>
+                                <span className={cx("novel-detail__views-number")}>{bookState.book?.view}</span>
                             </div>
                             <div className={cx("like-share-button")}>
                                 <FBLikeShare dataHref={currentURL} />
                             </div>
-                            <div className={cx("novel-detail__desc")} dangerouslySetInnerHTML={{ __html: book?.desc || '' }}>
+                            <div className={cx("novel-detail__desc")} dangerouslySetInnerHTML={{ __html: bookState.book?.desc || '' }}>
 
                             </div>
                             <div className={cx("hero-buttons")}>
@@ -89,7 +100,7 @@ const BookDetail = () => {
                         <div className={cx("list-chapters__title")}>
                             DS Chương
                         </div>
-                        {book && <ListChapter bookId={book.id} />}
+                        {bookState.book && <ListChapter bookId={bookState.book.id} />}
                     </div>
 
                     <div className={cx("comments")}>

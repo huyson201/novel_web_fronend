@@ -6,9 +6,13 @@ import classNamesBind from 'classnames/bind'
 import { BookCase } from '@src/models'
 const cx = classNamesBind.bind(styles)
 interface BookCaseItemProps {
-    bookcase: BookCase
+    bookcase: BookCase,
+    onDelete?: (bookId: number) => void
 }
-const BookcaseItem = ({ bookcase }: BookCaseItemProps) => {
+const BookcaseItem = ({ bookcase, onDelete }: BookCaseItemProps) => {
+    const handleDelete = () => {
+        onDelete && onDelete(bookcase.book.id)
+    }
     return (
 
         <div className={cx("book-items")}>
@@ -28,7 +32,7 @@ const BookcaseItem = ({ bookcase }: BookCaseItemProps) => {
                         Đọc tiếp chương {bookcase.chapter.chapterNumber}
                     </Link>
                 </div>
-                <button className={cx('btn', 'remove-btn')}><IoCloseOutline /></button>
+                <button className={cx('btn', 'remove-btn')} onClick={handleDelete}><IoCloseOutline /></button>
             </div>
         </div>
 
