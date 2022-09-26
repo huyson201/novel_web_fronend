@@ -90,8 +90,8 @@ const ChapterNavigation = ({ show, onClickOutside, onClickChapterLink }: Props) 
                 {
                     (data && (data.total / data.per_page > 1)) && (
                         <div className={cx("controls-btn")}>
-                            <Button className='btn btn-controls bg-light' onClick={handlePrev}  {...(!data?.previous?.page && { disabled: true })} title='Trang trước' />
-                            <Button className='btn btn-controls bg-light' onClick={handleNext} {...(!data?.next?.page && { disabled: true })} title='Trang Sau' />
+                            <Button className={cx('btn btn-controls bg-light')} onClick={handlePrev}  {...(!data?.previous?.page && { disabled: true })} title='Trang trước' />
+                            <Button className={cx('btn btn-controls bg-light')} onClick={handleNext} {...(!data?.next?.page && { disabled: true })} title='Trang Sau' />
                         </div>
                     )
                 }

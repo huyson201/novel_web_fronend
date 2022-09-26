@@ -9,24 +9,65 @@
   @include vars.breakpoint-down(md) {
     top: auto;
     bottom: 0;
-    flex-direction: row;
-    left: 50%;
-    transform: translateX(-50%) translateY(100%);
     width: 100%;
-    justify-content: space-around;
     transition: all 0.5s;
+    transform: translateY(100%);
     &.show {
-      transform: translateX(-50%) translateY(0);
+      transform: translateY(0);
     }
   }
+}
+.toolbar.show-settings {
+  transform: translateY(-100%);
+  @include vars.breakpoint-down(md) {
+    transform: translateY(0);
+  }
+}
+.toolbar.show-settings > .setting-controls {
+  display: block;
+}
+.toolbar.show-settings > .toolbar-controls {
+  display: none;
 }
 
 .toolbar-controls {
   display: flex;
   flex-direction: column;
-  display: none;
   padding: 8px;
+  @include vars.breakpoint-down(md) {
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+  }
 }
+.toolbar__btn {
+  font-size: 1.6rem;
+  @include vars.centerStyle;
+  width: 50px;
+  transition: all 0.3s;
+  height: 50px;
+  color: vars.$textColor;
+  border: none;
+  background: transparent;
+  outline: none;
+  cursor: pointer;
+  border-radius: 4px;
+  &:hover {
+    background: vars.$grayColor;
+  }
+  &.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
+.toolbar.theme-dark .toolbar__btn {
+  color: vars.$whiteColor;
+  &:hover {
+    background: #4a4a4a;
+  }
+}
+
 .setting-controls button {
   outline: none;
   border: none;
@@ -39,9 +80,16 @@
   border-radius: 6px;
 }
 
+.toolbar.theme-dark .setting-controls,
+.toolbar.theme-dark .toolbar-controls {
+  background: #363636;
+}
+
 .setting-controls {
   padding: 12px 16px;
+  display: none;
 }
+
 .control-header,
 .controls-area {
   display: flex;
@@ -62,7 +110,21 @@
     font-size: 24px;
   }
 }
-
+.toolbar.theme-dark :where(.close-settings-btn, .header-title, .control-title) {
+  color: vars.$whiteColor;
+}
+.toolbar.toolbar.theme-dark .close-settings-btn:hover {
+  background-color: #4a4a4a;
+}
+.toolbar.theme-dark .font-size-icon {
+  filter: invert(1);
+}
+.toolbar.theme-dark .fontsize-btn {
+  border-radius: 6px;
+  &:hover {
+    background-color: #4a4a4a;
+  }
+}
 .header-title {
   font-size: 26px;
   font-weight: 800;
@@ -71,6 +133,9 @@
 }
 .controls-area {
   justify-content: space-between;
+}
+.controls-area {
+  padding: 4px 0;
 }
 .control-title {
   font-size: 20px;
@@ -112,24 +177,4 @@ button.tool-theme.theme-book {
   $size: 24px;
   width: $size;
   height: $size;
-}
-.toolbar__btn {
-  font-size: 1.6rem;
-  @include vars.centerStyle;
-  width: 50px;
-  transition: all 0.3s;
-  height: 50px;
-  color: vars.$textColor;
-  border: none;
-  background: transparent;
-  outline: none;
-  cursor: pointer;
-  &:hover {
-    background: vars.$grayColor;
-  }
-  &.disabled {
-    cursor: not-allowed;
-    pointer-events: none;
-    opacity: 0.5;
-  }
 }

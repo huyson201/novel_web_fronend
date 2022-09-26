@@ -5,19 +5,20 @@ import storage from 'redux-persist/lib/storage'
 import authSlice from './features/authSlice'
 import bookcaseSlice from './features/bookcase'
 import bookSlice from './features/bookSlice'
-
+import settingsSlice from './features/settingsSlice'
 const persistConfig = {
     key: 'root',
     storage,
 }
 
 
-const persistedReducer = persistReducer(persistConfig, authSlice.reducer)
-
+const persistedAuthReducer = persistReducer(persistConfig, authSlice.reducer)
+const persistedSettingsReducer = persistReducer({ key: 'settings', storage }, settingsSlice.reducer)
 const reducer = combineReducers({
-    auth: persistedReducer,
+    auth: persistedAuthReducer,
     bookcase: bookcaseSlice.reducer,
-    book: bookSlice.reducer
+    book: bookSlice.reducer,
+    settings: persistedSettingsReducer
 })
 
 const store = configureStore({

@@ -1,5 +1,26 @@
 @use "@src/styles" as vars;
+.reading-page.theme-dark {
+  background-color: #4a4a4a;
+}
 
+.reading-page.theme-dark .chapter-title {
+  color: vars.$whiteColor;
+}
+.reading-page.theme-dark .novel-content {
+  background-color: #363636;
+  color: vars.$whiteColor;
+}
+
+.reading-page.theme-book {
+  background-color: #cead76;
+}
+
+.reading-page.reading-page.theme-book .novel-content {
+  background-color: #e2c38a;
+}
+.reading-page {
+  padding-bottom: 60px;
+}
 .content-container {
   width: 100%;
   margin: auto;

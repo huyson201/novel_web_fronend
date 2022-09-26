@@ -6,7 +6,7 @@ import Footer from '@src/components/Footer'
 import { matchRoutes, useLocation } from 'react-router-dom'
 const PageContainer = () => {
     const location = useLocation()
-    const routes = matchRoutes([{ path: '/:slug/chapter/:chapterId' }], location)
+    const routes = matchRoutes([{ path: '/:slug/:chapter/:chapterId' }], location)
 
     return (
         <>
