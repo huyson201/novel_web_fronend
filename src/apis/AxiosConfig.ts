@@ -19,8 +19,8 @@ let isRefresh = false
 axiosClient.interceptors.response.use((response) => {
     return response.data.data
 }, error => {
-    let { status, config } = error.response
-    if (status === 401 && !config._retry) {
+    let { status, config, data } = error.response
+    if (status === 401 && !config._retry && data === "Unauthorized") {
         if (isRefresh) {
             return
         }
@@ -28,7 +28,6 @@ axiosClient.interceptors.response.use((response) => {
         config._retry = true
         return authApi.refreshToken().then(() => {
             isRefresh = false
-            console.log("refresh token.....")
             return axiosClient(config)
         })
     }
