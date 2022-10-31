@@ -4,7 +4,8 @@ import styles from './BookItem.module.scss'
 import classNamesBind from 'classnames/bind'
 import { Book } from '@src/models/book'
 import moment from 'moment'
-import { getTimeToNow } from '@src/utils'
+import noImg from '@src/assets/images/no-img.png'
+import { getTimeToNow, handleErrorImage } from '@src/utils'
 
 const cx = classNamesBind.bind(styles)
 export interface Props {
@@ -12,11 +13,15 @@ export interface Props {
     bookRank?: number
 }
 export const BookItem = ({ book, bookRank }: Props) => {
+    const handleImgLoaded = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
+        event.currentTarget.nextElementSibling?.classList.add(cx('display-none'))
+    }
     return (
         <div className={cx('list-items')}>
             <div className={cx("img-box")}>
-                <Link to={book.slug || '#'}>
-                    <img src={book.image} alt="avatar" />
+                <Link to={'/' + (book.slug || '#')}>
+                    <img src={`${import.meta.env.VITE_API_HOST}/api/v1/image?url=${book.image}`} alt="avatar" onLoad={handleImgLoaded} onError={handleErrorImage} />
+                    <img src={noImg} alt="no-img" className={cx('no-img')} />
                     {
                         bookRank && (<div className={cx('book-rank', `top-${bookRank > 3 ? 'other' : bookRank}`)}>Top {bookRank ?? ''}</div>)
                     }
@@ -24,7 +29,7 @@ export const BookItem = ({ book, bookRank }: Props) => {
             </div>
             <div className={cx("list-items__contents")}>
                 <div className={cx("list-items__contents-title")}>
-                    <Link to={book.slug || '#'}>
+                    <Link to={'/' + (book.slug || '#')}>
                         <h3 className={cx('title')}>{book.title || 'Đang Cập Nhật'} <span className="tag tag-yellow tag-vip">VIP</span></h3>
                     </Link>
                     <p className={cx("author")}>{book.author?.replace("Tác giả: ", "") || 'Đang Cập Nhật'}</p>

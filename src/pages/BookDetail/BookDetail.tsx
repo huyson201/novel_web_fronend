@@ -50,7 +50,7 @@ const BookDetail = () => {
                 <div className={cx("detail-hero__content")}>
                     <div className="wrapper">
                         <div className={cx("novel-avatar")}>
-                            <img src={bookState.book?.image} alt="book-avatar" />
+                            <img src={`${import.meta.env.VITE_API_HOST}/api/v1/image?url=${bookState.book?.image}`} alt="book-avatar" />
                         </div>
                         <div className={cx("novel-detail")}>
                             <div className={cx("novel-detail__cates")}>

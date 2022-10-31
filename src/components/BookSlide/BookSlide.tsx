@@ -14,7 +14,8 @@ const cx = classNamesBind.bind(styles)
 
 export interface Props {
     title?: string,
-    type: 'popular' | 'recommend'
+    type: 'popular' | 'recommend',
+    titleLink?: string
 }
 const slideActions = {
     recommend: bookApi.getRecommendBooks,
@@ -23,12 +24,12 @@ const slideActions = {
 
 
 
-const BookSlide = ({ title, type }: Props) => {
+const BookSlide = ({ title, type, titleLink }: Props) => {
     const { data: slideData, isLoading, error } = useFetch<Array<Book>>(slideActions[type], [])
 
     return (
         <div className={cx('slider-wrapper')}>
-            <Link to={'#'}>
+            <Link to={titleLink ?? '#'}>
                 <h2 className={cx("title")}>{title || 'List Book Slider'}</h2>
             </Link>
             <Swiper

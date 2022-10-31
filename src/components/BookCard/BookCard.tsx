@@ -5,7 +5,7 @@ import styles from './BookCard.module.scss'
 import classNamesBind from 'classnames/bind'
 import classNames from 'classnames'
 import { Book } from '@src/models'
-import { removeHTML, getEllipsisText } from '@src/utils'
+import { removeHTML, getEllipsisText, handleErrorImage } from '@src/utils'
 const cx = classNamesBind.bind(styles)
 
 export interface Props {
@@ -18,7 +18,7 @@ const BookCard = ({ className, book }: Props) => {
     return (
         <div className={classNames(cx('book-card-items'), className)}>
             <Link to={book.slug}>
-                <img src={book.image} alt="slider-img" />
+                <img src={`${import.meta.env.VITE_API_HOST}/api/v1/image?url=${book.image}`} alt="slider-img" onError={handleErrorImage} />
 
                 <div className={cx("cates")}>
                     <span className="tag tag-vip tag-yellow">VIP</span>

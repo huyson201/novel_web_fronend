@@ -2,6 +2,7 @@ import moment from 'moment'
 
 export * from './constants'
 export * from './cookie'
+export * from './ErrorImage'
 export const getTimeToNow = (time?: string) => {
     if (!time) return 'Đang cập nhập'
     let startTime = moment(time)

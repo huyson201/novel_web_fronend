@@ -3,6 +3,7 @@ import styles from './SearchResultItem.module.scss'
 import bindClass from 'classnames/bind'
 import { Link } from 'react-router-dom'
 import { Book } from '@src/models'
+import { handleErrorImage } from '@src/utils'
 interface SearchResultItemProps {
     book: Book
 }
@@ -12,7 +13,7 @@ const SearchResultItem = ({ book }: SearchResultItemProps) => {
         <Link to={'#'}>
             <div className={cx('result-item')}>
                 <div className={cx("img-box")}>
-                    <img src={book.image} alt="img" />
+                    <img src={`${import.meta.env.VITE_API_HOST}/api/v1/image?url=${book.image}`} alt="img" onError={handleErrorImage} />
                 </div>
                 <div className={cx("result-content")}>
                     <div className={cx("book-title")}>{book.title}</div>

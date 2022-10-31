@@ -22,7 +22,7 @@ const Home = () => {
                 {/* search bar */}
                 <BookSearch placeholder='Tìm kiếm truyện...' />
                 <BookSlide type='recommend' title='Truyện Đề cử' />
-                <BookSlide type='popular' title='Bảng Xếp Hạng' />
+                <BookSlide type='popular' title='Bảng Xếp Hạng' titleLink='/the-loai/bxh' />
 
                 {/* list novels */}
                 <section className={cx('list-novels')}>

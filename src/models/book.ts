@@ -29,4 +29,8 @@ export interface DeleteBookCaseResponse {
     chapterId: number
 }
 
-
+export interface BookcaseResponse {
+    bookId: number,
+    userId: number,
+    chapterId: number
+}

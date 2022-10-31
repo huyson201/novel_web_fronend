@@ -8,6 +8,7 @@ import styles from './Banner.module.scss'
 import { Slider } from '@src/models';
 import commonApi from '@src/apis/common.api';
 import { useFetch } from '@src/hooks';
+import { handleErrorImage } from '@src/utils';
 const cx = classBind.bind(styles)
 const Banner = () => {
     const { data: sliderData, isLoading, error } = useFetch<Array<Slider>>(commonApi.getSliders, [])
@@ -31,7 +32,7 @@ const Banner = () => {
                                 <Suspense  >
                                     <div>
                                         <Link to={value.book.slug}>
-                                            <img src={value.bannerImg} alt="slider-img" />
+                                            <img src={value.bannerImg} alt="slider-img" onError={handleErrorImage} />
                                         </Link>
                                     </div>
                                 </Suspense>

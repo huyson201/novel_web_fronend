@@ -7,16 +7,20 @@ import classNamesBind from 'classnames/bind'
 import ChapterNavigation from '@src/components/ChapterNavigation'
 import { useFetch, useLocalStorage } from '@src/hooks'
 import bookApi from '@src/apis/book.api'
-import { Chapter as BookChapter, ChapterResponse, Settings } from '@src/models'
+import { BookcaseResponse, Chapter as BookChapter, ChapterResponse, Settings } from '@src/models'
 import { useAppDispatch, useAppSelector } from '@src/redux'
 import NotMatch from '../NotMatch'
 import { fetchBook, fetchBookFail, fetchBookSuccess } from '@src/redux/features/bookSlice'
+import { BookmarkType } from '@src/components/ToolBar/ToolBar'
+import authApi from '@src/apis/auth.api'
 const cx = classNamesBind.bind(styles)
 
 const Chapter = () => {
     const book = useAppSelector(state => state.book.book)
+    const user = useAppSelector(state => state.auth.authProfile)
     const dispatch = useAppDispatch()
     const [showNav, setShowNav] = useState<boolean>(false)
+    const [bookcase, setBookcase] = useState<BookcaseResponse>()
     const { slug, chapterId } = useParams()
     const settings = useAppSelector(state => state.settings)
     if (!slug || !chapterId) return <NotMatch />
@@ -25,6 +29,19 @@ const Chapter = () => {
         if (!showNav) return
         setShowNav(false)
     }
+
+    const handleClickBookmark = async () => {
+        if (!book || !user) return
+        if (bookcase && bookcase.chapterId === (+chapterId)) {
+            await authApi.deleteBookcase(book.id)
+            setBookcase(undefined)
+            return
+        }
+
+        let result = await authApi.addBookcase(book.id, +chapterId)
+        setBookcase(result)
+    }
+
     useEffect(() => {
         if (book) return
         const fetchBookData = async () => {
@@ -40,11 +57,22 @@ const Chapter = () => {
         fetchBookData()
     }, [slug])
 
+    useEffect(() => {
+        if (!user || !book) return
+        const fetchBookcaseById = async () => {
+            console.log('fetch bookcase by id....')
+            let resData = await authApi.getBookcaseById(book.id)
+            setBookcase(resData)
+        }
+        fetchBookcaseById()
+    }, [user, chapterId, book])
+
+
     const { data: res, isLoading, error } = useFetch<ChapterResponse>(async () => bookApi.getChapter(slug, +(chapterId)), [chapterId, slug])
 
     return (
         <>
-            <ToolBar prevLink={res?.prevChapter.link} nextLink={res?.nextChapter.link} onClickListButton={() => setShowNav(true)} />
+            <ToolBar onClickBookmark={handleClickBookmark} bookMark={bookcase && bookcase.chapterId === (+chapterId) ? "Added" : "NoAdded"} prevLink={res?.prevChapter.link} nextLink={res?.nextChapter.link} onClickListButton={() => setShowNav(true)} />
             <div className={cx('reading-page', `theme-${settings?.theme ?? 'light'}`)}>
                 <div className="wrapper">
                     <div className={cx("content-container",)}>
