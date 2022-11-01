@@ -2,7 +2,7 @@
 .book-items {
   width: calc(100% / 4);
   padding: 12px;
-  height: 100%;
+  display: flex;
 
   @include vars.breakpoint-down(md) {
     width: calc(100% / 2);
