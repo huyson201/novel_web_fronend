@@ -28,6 +28,9 @@ const authApi = {
     },
     getBookcaseById: (bookId: number) => {
         return axiosClient.get<BookcaseResponse>('auth/me/bookcase/find/' + bookId)
+    },
+    changeUsername: (username: string) => {
+        return axiosClient.post<Auth>('auth/me/update/name', { username })
     }
 }
 

@@ -52,11 +52,37 @@ const authSlice = createSlice({
             state.authProfile = undefined
             state.loading = false
             state.isLogged = false
+        },
+        updateName: (state) => {
+            state.loading = true
+        },
+        updateNameSuccess: (state, action: PayloadAction<Auth>) => {
+            state.loading = false
+            if (!state.authProfile) return
+            state.authProfile = action.payload
+
+        },
+        updateNameFail: (state) => {
+            state.loading = true
         }
     }
 
 
 })
 export default authSlice
-export const { signIn, signInSuccess, signInFail, login, loginSuccess, loginFail, logout, fetchAuth, fetchAuthSuccess, fetchAuthFail } = authSlice.actions
+export const {
+    signIn,
+    signInSuccess,
+    signInFail,
+    login,
+    loginSuccess,
+    loginFail,
+    logout,
+    fetchAuth,
+    fetchAuthSuccess,
+    fetchAuthFail,
+    updateName,
+    updateNameSuccess,
+    updateNameFail
+} = authSlice.actions
 

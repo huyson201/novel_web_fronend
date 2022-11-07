@@ -18,6 +18,12 @@ export interface LoginInput {
     password: string
 }
 
+export interface ChangePasswordInput {
+    oldPasswd: string,
+    newPasswd: string,
+    reNewPasswd: string
+}
+
 export interface AuthProfile {
     id: number,
     uid: String,
