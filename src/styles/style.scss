@@ -82,7 +82,7 @@ $tagTextColors: (
   font-size: 14px;
   margin-bottom: 8px;
   transition: all 0.3s;
-
+  font-weight: normal;
   &:not(:nth-child(0)) {
     margin-right: 8px;
   }

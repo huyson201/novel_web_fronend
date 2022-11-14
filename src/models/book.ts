@@ -15,7 +15,8 @@ export interface Book {
     createdAt: string,
     updatedAt: string
     chapters?: [Chapter]
-    view: number
+    view: number,
+    vip: number
 }
 
 export interface BookCase {

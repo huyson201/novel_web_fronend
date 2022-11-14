@@ -16,6 +16,7 @@ export const BookItem = ({ book, bookRank }: Props) => {
     const handleImgLoaded = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
         event.currentTarget.nextElementSibling?.classList.add(cx('display-none'))
     }
+
     return (
         <div className={cx('list-items')}>
             <div className={cx("img-box")}>
@@ -30,7 +31,7 @@ export const BookItem = ({ book, bookRank }: Props) => {
             <div className={cx("list-items__contents")}>
                 <div className={cx("list-items__contents-title")}>
                     <Link to={'/' + (book.slug || '#')}>
-                        <h3 className={cx('title')}>{book.title || 'Đang Cập Nhật'} <span className="tag tag-yellow tag-vip">VIP</span></h3>
+                        <h3 className={cx('title')}>{book.title || 'Đang Cập Nhật'} {book.state === 'full' && <span className="tag tag-green">Full</span>}{book.vip === 1 && <span className="tag tag-yellow tag-vip">VIP</span>}</h3>
                     </Link>
                     <p className={cx("author")}>{book.author?.replace("Tác giả: ", "") || 'Đang Cập Nhật'}</p>
                 </div>

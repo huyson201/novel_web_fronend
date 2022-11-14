@@ -70,7 +70,12 @@ const Profile = () => {
 
     // handle change password
     const handleChangePasswd = async (data: ChangePasswordInput) => {
-
+        try {
+            await authApi.changePassword({ oldPassword: data.oldPasswd, newPassword: data.newPasswd, confirmPassword: data.reNewPasswd })
+            setShowUpdatePassword(false)
+        } catch (error) {
+            console.log(error)
+        }
     }
     return (
         <div className={cx('profile-page')}>
@@ -131,7 +136,6 @@ const Profile = () => {
                                             {errors?.oldPasswd && <div className={cx('feed-back-errors')}>{errors.oldPasswd.message}</div>}
                                             <div className={cx("edit-box__fields")}>
                                                 <input type="password" placeholder='Nhập mật khẩu mới...' {...register('newPasswd')} />
-
                                             </div>
                                             {errors?.newPasswd && <div className={cx('feed-back-errors')}>{errors.newPasswd.message}</div>}
                                             <div className={cx("edit-box__fields")}>

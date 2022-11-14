@@ -10,11 +10,11 @@ export interface Props {
 }
 const FullBookItem = ({ book }: Props) => {
     return (
-        <Link to="#" className={cx('novel-full-item__links')}>
+        <Link to={`/${book.slug}`} className={cx('novel-full-item__links')}>
             <div className={cx('novel-full-items')}>
                 <h3 className={cx('novel-full-items__title')}>{book.title}</h3>
                 <div className={cx("novel-full-items__cates")}>
-                    <span className='tag tag-yellow tag-vip hover-none'>vip</span>
+                    {book.vip === 1 && <span className='tag tag-yellow tag-vip hover-none'>vip</span>}
                     <span className='tag tag-green hover-none'>Full</span>
 
                     {

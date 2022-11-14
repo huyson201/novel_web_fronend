@@ -31,6 +31,9 @@ const authApi = {
     },
     changeUsername: (username: string) => {
         return axiosClient.post<Auth>('auth/me/update/name', { username })
+    },
+    changePassword: (data: { oldPassword: string, newPassword: string, confirmPassword: string }) => {
+        return axiosClient.post<{ message: string, data: any, status: number }>('auth/me/update/password', { ...data })
     }
 }
 

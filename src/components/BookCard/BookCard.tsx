@@ -21,7 +21,9 @@ const BookCard = ({ className, book }: Props) => {
                 <img src={`${import.meta.env.VITE_API_HOST}/api/v1/image?url=${book.image}`} alt="slider-img" onError={handleErrorImage} />
 
                 <div className={cx("cates")}>
-                    <span className="tag tag-vip tag-yellow">VIP</span>
+                    {book.vip === 1 && <span className="tag tag-vip tag-yellow">VIP</span>}
+                    {book.state === 'full' && <span className="tag tag-green">Full</span>}
+
                 </div>
                 <div className={cx("book-info")}>
                     <h2 className={cx("book-info__title")}>
