@@ -46,7 +46,7 @@ const BookDetail = () => {
     return (
         <div className={cx('detail-page')}>
             <div className={cx("detail-hero")}>
-                <div className={cx("bg-blur")} style={{ 'background': `url(${bookState.book?.image})` }}></div>
+                <div className={cx("bg-blur")} style={{ 'background': `url(${import.meta.env.VITE_API_HOST}/api/v1/image?url=${bookState.book?.image})` }}></div>
                 <div className={cx("detail-hero__content")}>
                     <div className="wrapper">
                         <div className={cx("novel-avatar")}>

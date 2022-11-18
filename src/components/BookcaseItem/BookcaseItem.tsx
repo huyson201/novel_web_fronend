@@ -4,7 +4,10 @@ import { Link } from 'react-router-dom'
 import styles from './BookcaseItem.module.scss'
 import classNamesBind from 'classnames/bind'
 import { BookCase } from '@src/models'
-import { handleErrorImage } from '@src/utils'
+import { handleErrorImage, handleImgLoaded } from '@src/utils'
+import noImg from '@src/assets/images/no-img.png'
+import ImageLoader from '../ImageLoader/ImageLoader'
+
 const cx = classNamesBind.bind(styles)
 interface BookCaseItemProps {
     bookcase: BookCase,
@@ -15,11 +18,13 @@ const BookcaseItem = ({ bookcase, onDelete }: BookCaseItemProps) => {
         onDelete && onDelete(bookcase.book.id)
     }
     return (
-
         <div className={cx("book-items")}>
             <div className={cx("book-items__container")}>
                 <div className={cx("book-items__img")}>
-                    <Link to={`/${bookcase.book.slug}`}> <img src={`${import.meta.env.VITE_API_HOST}/api/v1/image?url=${bookcase.book.image}`} alt="book image" onError={handleErrorImage} /></Link>
+                    <Link to={`/${bookcase.book.slug}`}>
+                        <img src={`${import.meta.env.VITE_API_HOST}/api/v1/image?url=${bookcase.book.image}`} alt="book image" onLoad={handleImgLoaded} onError={handleErrorImage} />
+                        <ImageLoader imgUrl={noImg} />
+                    </Link>
                 </div>
                 <div className={cx("book-items__title")}>
                     <Link to={`/${bookcase.book.slug}`}>

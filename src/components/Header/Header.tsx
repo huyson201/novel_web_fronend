@@ -52,11 +52,11 @@ const Header = () => {
                                     <Dropdown title={auth.authProfile?.name || ''} toggleClassName={cx('account-drop-toggle')} className='custom-drop' dropContentClassName={cx('account-drop-content')}>
                                         <Link to='/account'>
                                             <IoPersonSharp />
-                                            <span>Trang cá nhân</span>
+                                            Trang cá nhân
                                         </Link>
                                         <Link to={'#'} onClick={handleLogout}>
                                             <IoLogOutOutline />
-                                            <span>Đăng xuất</span>
+                                            Đăng xuất
                                         </Link>
                                     </Dropdown>
                                 </div>

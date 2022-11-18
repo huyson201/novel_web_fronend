@@ -5,3 +5,6 @@ export function handleErrorImage(event: React.SyntheticEvent<HTMLImageElement, E
     event.currentTarget.src = errorImgIcon
 }
 
+export const handleImgLoaded = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    event.currentTarget.nextElementSibling?.classList.add('hide')
+}

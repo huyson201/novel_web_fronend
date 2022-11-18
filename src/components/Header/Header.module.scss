@@ -194,11 +194,11 @@
   & a {
     display: flex;
     align-items: center;
-    padding: 0 12px;
+    padding: 12px;
     gap: 4px;
     color: vars.$textColor;
     transition: color 0.3s;
-    height: 50px;
+    // height: 50px;
   }
   & a:hover {
     color: vars.$primaryColor;

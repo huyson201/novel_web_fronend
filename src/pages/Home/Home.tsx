@@ -18,9 +18,13 @@ const Home = () => {
             {/* main content */}
 
             <div className="wrapper">
+                {/* Banner */}
                 <Banner />
+
                 {/* search bar */}
                 <BookSearch placeholder='Tìm kiếm truyện...' />
+
+                {/* Book slider */}
                 <BookSlide type='recommend' title='Truyện Đề cử' />
                 <BookSlide type='popular' title='Bảng Xếp Hạng' titleLink='/the-loai/bxh' />
 

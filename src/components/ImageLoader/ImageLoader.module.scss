@@ -1,0 +1,40 @@
+@use "@src/styles" as *;
+.img-loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+  overflow: hidden;
+}
+
+img.no-img {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+}
+
+.loader {
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 3px solid #f6f6f6;
+  border-top-color: transparent;
+  animation: rotate 1s linear infinite;
+  z-index: 3;
+}
+
+@keyframes rotate {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}

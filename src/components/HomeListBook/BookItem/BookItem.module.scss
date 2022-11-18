@@ -30,15 +30,6 @@
     min-height: 90px;
     min-width: 60px;
   }
-  & img.no-img {
-    position: absolute;
-    z-index: 2;
-    top: 0;
-    left: 0;
-  }
-  & img.no-img.display-none {
-    display: none;
-  }
 }
 
 .list-items__contents {

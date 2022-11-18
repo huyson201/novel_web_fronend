@@ -62,39 +62,6 @@ const BookSlide = ({ title, type, titleLink }: Props) => {
                         </SwiperSlide>
                     ))
                 }
-                {/* <SwiperSlide className={classNames('swiper-slide', cx('swiper-book-card'))}>
-                    <BookCard className={cx('slide-content')} />
-                </SwiperSlide>
-                <SwiperSlide className={classNames('swiper-slide', cx('swiper-book-card'))}>
-                    <BookCard className={cx('slide-content')} />
-                </SwiperSlide>
-                <SwiperSlide className={classNames('swiper-slide', cx('swiper-book-card'))}>
-                    <BookCard className={cx('slide-content')} />
-                </SwiperSlide>
-                <SwiperSlide className={classNames('swiper-slide', cx('swiper-book-card'))}>
-                    <BookCard className={cx('slide-content')} />
-                </SwiperSlide>
-                <SwiperSlide className={classNames('swiper-slide', cx('swiper-book-card'))}>
-                    <BookCard className={cx('slide-content')} />
-                </SwiperSlide>
-                <SwiperSlide className={classNames('swiper-slide', cx('swiper-book-card'))}>
-                    <BookCard className={cx('slide-content')} />
-                </SwiperSlide>
-                <SwiperSlide className={classNames('swiper-slide', cx('swiper-book-card'))}>
-                    <BookCard className={cx('slide-content')} />
-                </SwiperSlide>
-                <SwiperSlide className={classNames('swiper-slide', cx('swiper-book-card'))}>
-                    <BookCard className={cx('slide-content')} />
-                </SwiperSlide>
-                <SwiperSlide className={classNames('swiper-slide', cx('swiper-book-card'))}>
-                    <BookCard className={cx('slide-content')} />
-                </SwiperSlide>
-                <SwiperSlide className={classNames('swiper-slide', cx('swiper-book-card'))}>
-                    <BookCard className={cx('slide-content')} />
-                </SwiperSlide>
-                <SwiperSlide className={classNames('swiper-slide', cx('swiper-book-card'))}>
-                    <BookCard className={cx('slide-content')} />
-                </SwiperSlide> */}
             </Swiper>
         </div>
     )
