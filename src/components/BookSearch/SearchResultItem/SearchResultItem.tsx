@@ -10,7 +10,7 @@ interface SearchResultItemProps {
 const cx = bindClass.bind(styles)
 const SearchResultItem = ({ book }: SearchResultItemProps) => {
     return (
-        <Link to={'#'}>
+        <Link to={`/${book.slug}`}>
             <div className={cx('result-item')}>
                 <div className={cx("img-box")}>
                     <img src={`${import.meta.env.VITE_API_HOST}/api/v1/image?url=${book.image}`} alt="img" onError={handleErrorImage} />

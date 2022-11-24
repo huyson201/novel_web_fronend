@@ -88,10 +88,10 @@ const Profile = () => {
                             <div>{user?.name}</div>
                             {
                                 !showUpdateName ? (
-                                    <button className={cx('btn', 'edit-btn')} onClick={handleShowUpdateName}><FaPencilAlt />Sữa</button>
+                                    <button className={cx('btn', 'edit-btn')} onClick={handleShowUpdateName}><FaPencilAlt />Edit</button>
                                 ) :
                                     (
-                                        <button className={cx('btn', 'edit-btn')} onClick={handleShowUpdateName}>Close</button>
+                                        <button className={cx('btn', 'edit-btn')} onClick={handleShowUpdateName}>Cancel</button>
                                     )
                             }
                         </div>
@@ -100,7 +100,7 @@ const Profile = () => {
                                 <div className={cx("edit-box")}>
                                     <div className={cx("edit-box__fields")}>
                                         <input type="text" name='newName' placeholder='Nhập tên mới...' ref={nameIpRef} />
-                                        <button className={cx('btn', 'btn-save')} onClick={handleChangeName}>Lưu</button>
+                                        <button className={cx('btn', 'btn-save')} onClick={handleChangeName}>Change</button>
                                     </div>
                                 </div>
                             )
@@ -118,10 +118,10 @@ const Profile = () => {
                             <div className={cx("profile-row__value")}><IoKeyOutline /> Nhấn sữa để thây đổi Mật khẩu</div>
                             {
                                 !showUpdatePassword ? (
-                                    <button className={cx('btn', 'edit-btn')} onClick={handleShowUpdatePassword}><FaPencilAlt />Sữa</button>
+                                    <button className={cx('btn', 'edit-btn')} onClick={handleShowUpdatePassword}><FaPencilAlt />Edit</button>
                                 ) :
                                     (
-                                        <button className={cx('btn', 'edit-btn')} onClick={handleShowUpdatePassword}>Close</button>
+                                        <button className={cx('btn', 'edit-btn')} onClick={handleShowUpdatePassword}>Cancel</button>
                                     )
                             }
                         </div>
@@ -144,7 +144,7 @@ const Profile = () => {
                                             </div>
                                             {errors?.reNewPasswd && <div className={cx('feed-back-errors')}>{errors.reNewPasswd.message}</div>}
                                         </div>
-                                        <button className={cx('btn', 'btn-save-multi-field')}>Lưu</button>
+                                        <button className={cx('btn', 'btn-save-multi-field')}>Change</button>
                                     </div>
                                 </form>
                             )

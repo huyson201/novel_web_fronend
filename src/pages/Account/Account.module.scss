@@ -65,6 +65,7 @@
         font-weight: 600;
         align-items: center;
         gap: 8px;
+        color: vars.$textColor;
 
         @include vars.breakpoint-down(md) {
           height: 100%;

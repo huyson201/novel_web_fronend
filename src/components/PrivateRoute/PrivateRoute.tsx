@@ -7,9 +7,10 @@ export interface PrivateRouteProps {
     children: React.ReactNode | React.ReactNode[]
 }
 const PrivateRoute = ({ children }: PrivateRouteProps) => {
-    const isRefreshToken = Boolean(cookies.get(REFRESH_TOKEN_KEY))
+    const isLogged = useAppSelector(state => state.auth.isLogged)
+    // const isRefreshToken = Boolean(cookies.get(REFRESH_TOKEN_KEY))
     const location = useLocation()
-    if (!isRefreshToken) return <Navigate to={'/login'} state={{ from: location }} />
+    if (!isLogged) return <Navigate to={'/login'} state={{ from: location }} />
     return (
         <>
             {children}

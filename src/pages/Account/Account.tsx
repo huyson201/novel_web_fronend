@@ -61,7 +61,7 @@ const Account = () => {
                             {
                                 sideBarItems.map((e, index) => {
                                     return (
-                                        <li key={index}><NavLink end className={cx(`side-bar__links`)} to={e.path || '#'}>{e.icon}{e.title}</NavLink></li>
+                                        <li key={index}><NavLink end className={({ isActive }) => cx(`side-bar__links`, { active: isActive })} to={e.path || '#'}>{e.icon}{e.title}</NavLink></li>
                                     )
                                 })
                             }
