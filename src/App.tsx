@@ -1,5 +1,4 @@
-import React from 'react'
-import Header from './components/Header'
+import React, { Suspense, lazy } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -8,54 +7,59 @@ import 'swiper/css/scrollbar';
 import '@src/styles/style.scss'
 
 import PageContainer from './components/PageContainer'
-import Home from '@src/pages/Home'
-import Login from '@src/pages/Login';
-import Register from '@src/pages/Register';
-import BookDetail from '@src/pages/BookDetail';
-import Chapter from '@src/pages/Chapter';
-import Category from '@src/pages/Category';
-import Account from '@src/pages/Account';
-import Profile from '@src/pages/Account/Profile';
-import Bookcase from './pages/Bookcase';
-import PrivateRoute from './components/PrivateRoute';
 import { withBooks } from './hooks/withBooks';
 import { menuList } from './utils';
-import Books from './pages/Books';
-import BookRank from './pages/BookRank/BookRank';
 import NotMatch from './pages/NotMatch';
-import router, { RouterType } from './Routers';
-import CateWrapper from './components/CateWrapper';
+import { RouterType } from './Routers';
+import PageLoader from './components/PageLoader/PageLoader';
+
+const Home = lazy(() => import('@src/pages/Home'))
+const Login = lazy(() => import('@src/pages/Login'))
+const Register = lazy(() => import('@src/pages/Register'))
+const BookDetail = lazy(() => import('@src/pages/BookDetail'))
+const Chapter = lazy(() => import('@src/pages/Chapter'))
+const Category = lazy(() => import('@src/pages/Category'))
+const Account = lazy(() => import('@src/pages/Account'))
+const Profile = lazy(() => import('@src/pages/Account/Profile'))
+const Bookcase = lazy(() => import('@src/pages/Bookcase'))
+const PrivateRoute = lazy(() => import('./components/PrivateRoute'))
+const Books = lazy(() => import('./pages/Books'))
+const BookRank = lazy(() => import('./pages/BookRank/BookRank'))
+const CateWrapper = lazy(() => import('./components/CateWrapper'))
 
 function App() {
 
   return (
     <div className="App">
-      <Routes>
-        <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/' element={<PageContainer />} >
-          <Route index element={<Home />} />
-          <Route path='/home' element={<Home />} />
+      <Suspense fallback={<PageLoader />}>
+        <Routes>
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/' element={<PageContainer />} >
+            <Route index element={<Home />} />
+            <Route path='/home' element={<Home />} />
 
-          <Route path=':slug' element={<BookDetail />} />
-          <Route path=':slug/:chapter/:chapterId' element={<Chapter />} />
-          <Route path='the-loai/' element={<CateWrapper />}>
-            {
-              menuList.map((data, index) => {
-                const ListBookComponent = withBooks(Books, { fetchData: async (page: number) => data.fetchData({ page: page }), title: data.name })
-                return <Route path={data.slug} key={index} element={<ListBookComponent />} />
-              })
-            }
-            <Route path='bxh' element={<BookRank />} />
-            <Route path=':cateSlug' element={<Category />} />
+            <Route path=':slug' element={<BookDetail />} />
+            <Route path=':slug/:chapter/:chapterId' element={<Chapter />} />
+            <Route path='the-loai/' element={<CateWrapper />}>
+              {
+                menuList.map((data, index) => {
+                  const ListBookComponent = withBooks(Books, { fetchData: async (page: number) => data.fetchData({ page: page }), title: data.name })
+                  return <Route path={data.slug} key={index} element={<ListBookComponent />} />
+                })
+              }
+              <Route path='bxh' element={<BookRank />} />
+              <Route path=':cateSlug' element={<Category />} />
+            </Route>
+            <Route path='account' element={<PrivateRoute><Account /></PrivateRoute>}>
+              <Route index element={<Bookcase />} />
+              <Route path='profile' element={<Profile />} />
+            </Route>
+            <Route path='*' element={<NotMatch title='Trang này không tồn tại hoặc bị xóa' />} />
           </Route>
-          <Route path='account' element={<PrivateRoute><Account /></PrivateRoute>}>
-            <Route index element={<Bookcase />} />
-            <Route path='profile' element={<Profile />} />
-          </Route>
-          <Route path='*' element={<NotMatch title='Trang này không tồn tại hoặc bị xóa' />} />
-        </Route>
-      </Routes>
+        </Routes>
+      </Suspense>
+
     </div>
   )
 }

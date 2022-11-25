@@ -27,7 +27,7 @@ const Books = ({ title, data, showRank }: BooksProps) => {
     return (
         <>
             <div className={cx("list-book__title")}>
-                <h2>{title ?? 'List'}</h2>
+                <h2>{title}</h2>
             </div>
             <div className={cx('list_books')}>
                 {

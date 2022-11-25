@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { IoCreateOutline, IoCheckmarkOutline } from 'react-icons/io5'
 import InputField from '@src/components/InputField'
 import { Button } from '@src/components/Button'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import FormFeedback from '@src/components/FormFeedBack'
 import styles from './Register.module.scss'
 import classNamesBind from 'classnames/bind'
@@ -26,6 +26,7 @@ const schemaObj = yup.object({
 const Register = () => {
     const disPatch = useDispatch()
     const navigate = useNavigate()
+    const auth = useAppSelector(state => state.auth)
     const [signInError, setSignInError] = useState<string>('')
     const [disabled, setDisabled] = useState<boolean>(true)
     const { register, handleSubmit, formState: { errors } } = useForm<RegisterInput>({
@@ -45,6 +46,10 @@ const Register = () => {
             disPatch(signInFail())
             setSignInError(error.response?.data?.message)
         }
+    }
+
+    if (auth.isLogged) {
+        return <Navigate to={'/'} replace />
     }
 
     return (
@@ -74,7 +79,7 @@ const Register = () => {
                         </div>
 
                         <div className="form__btn-box">
-                            <Button disabled={disabled} title='Đăng ký' type='submit' className={cx('register-btn')} />
+                            <Button disabled={disabled} loading={auth.loading} title='Đăng ký' type='submit' className={cx('register-btn')} />
                         </div>
 
                         <div className={cx("login-link")}>

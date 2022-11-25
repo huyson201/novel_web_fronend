@@ -54,7 +54,7 @@ const Login = () => {
         }
     }
 
-    if (cookies.get('auth.refresh_token')) {
+    if (auth.isLogged) {
         return <Navigate to={redirectUrl} replace />
     }
 
@@ -76,7 +76,7 @@ const Login = () => {
                             <Link to="#">Quên mật khẩu?</Link>
                         </div>
                         <div className={cx("form__btn-box")}>
-                            <Button type={'submit'} title='Đăng nhập' className={cx('login-btn')} />
+                            <Button type={'submit'} loading={auth.loading} title='Đăng nhập' className={cx('login-btn')} />
                         </div>
                         <div className={cx("register-link")}>
                             Bạn chưa có tài khoản?

@@ -1,0 +1,29 @@
+@use "@src/styles" as *;
+
+.page-loader {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+  background-color: $whiteColor;
+}
+
+.tai-chi {
+  width: 100px;
+  color: $primaryColor;
+  animation: taichiRotate 0.8s linear infinite;
+
+  @include breakpoint-down(xs) {
+    width: 80px;
+  }
+}
+
+@keyframes taichiRotate {
+  to {
+    transform: rotate(360deg);
+  }
+}

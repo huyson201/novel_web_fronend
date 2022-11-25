@@ -27,7 +27,7 @@ const Category = () => {
         )
     }
     return (
-        <React.Suspense fallback={'...loading'}>
+        <React.Suspense>
             <Books title={`${cate?.name && `Truyện ${cate.name}`}`} data={data} />
         </React.Suspense>
     )

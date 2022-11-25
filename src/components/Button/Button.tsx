@@ -3,29 +3,31 @@ import { Link, LinkProps } from 'react-router-dom'
 import classNames from 'classnames/bind'
 import classnames from 'classnames'
 import styles from './Button.module.scss'
+import Loader from '../Loader/Loader'
 
 const cx = classNames.bind(styles)
 interface Props {
     title?: string,
     btnType?: 'primary' | 'gray' | 'yellow',
-    disabled?: boolean
+    disabled?: boolean,
+    loading?: boolean
 }
 interface LinkButtonProps extends LinkProps, Props { }
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, Props { }
 
-export const LinkButton = ({ title, className, btnType = 'primary', disabled, ...props }: LinkButtonProps) => {
+export const LinkButton = ({ title = 'Button', className, btnType = 'primary', disabled, loading, ...props }: LinkButtonProps) => {
     return (
-        <Link className={classnames(className, cx(`btn-${btnType}`, { disabled: disabled }, 'btn'))} {...props}>
-            {title || "Button"}
+        <Link className={cx(className, `btn-${btnType}`, { disabled: disabled }, 'btn')} {...props}>
+            {loading ? <Loader size={20} /> : title}
         </Link>
     )
 }
 
-export const Button = ({ title, className, btnType = 'primary', disabled, ...props }: ButtonProps) => {
+export const Button = ({ title = 'Button', className, btnType = 'primary', loading, disabled, ...props }: ButtonProps) => {
     return (
-        <button {...props} className={classnames(className, cx(`btn-${btnType}`, 'btn', { disabled: disabled }))}>
-            {title || "button"}
+        <button {...props} className={cx(className, `btn-${btnType}`, 'btn', { disabled: disabled })}>
+            {loading ? <Loader size={20} /> : title}
         </button>
     )
 }
