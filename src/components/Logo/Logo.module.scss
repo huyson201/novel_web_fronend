@@ -1,0 +1,33 @@
+@use "@src/styles" as *;
+
+.logo > a {
+  color: $primaryColor;
+
+  @include breakpoint-down(md) {
+    font-size: 1.2rem;
+  }
+
+  @include breakpoint-down(xs) {
+    font-size: 1rem;
+  }
+  & h2 {
+    font-size: 2rem;
+  }
+  & span.first {
+    color: #9c92db;
+  }
+  & span.last {
+    color: #ff42d9;
+  }
+}
+
+.logo-img {
+  width: 160px;
+  @include breakpoint-down(md) {
+    width: 140px;
+  }
+
+  @include breakpoint-down(xs) {
+    width: 120px;
+  }
+}

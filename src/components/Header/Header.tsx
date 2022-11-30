@@ -6,11 +6,12 @@ import Dropdown from '../DropDown/DropDown'
 import { LinkButton } from '../Button'
 import style from './Header.module.scss'
 import { useAppDispatch, useAppSelector } from '@src/redux'
-import { Category } from '@src/models'
-import categoryApi from '@src/apis/category.api'
 import { logout } from '@src/redux/features/authSlice'
 import authApi from '@src/apis/auth.api'
 import HeaderMenuItem from '../HeaderMenuItem/HeaderMenuItem'
+import logo from '@src/assets/images/logo.png'
+import Logo from '../Logo/Logo'
+
 const cx = classnames.bind(style)
 
 const Header = () => {
@@ -20,7 +21,6 @@ const Header = () => {
     const auth = useAppSelector(state => state.auth)
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
-
 
     const handleClickBars = () => {
         setShowMenu(!showMenu)
@@ -36,9 +36,15 @@ const Header = () => {
         <header className={cx('header-top')}>
             <div className="wrapper">
                 <div className={cx("header-container")}>
-                    <div className={cx("logo")}>
-                        <Link to={'/'}><h2><span className={cx('first')}>Net</span><span className={cx('last')}>Novels</span></h2></Link>
-                    </div>
+                    {/* <div className={cx("logo")}>
+                        <Link to={'/'}>
+                            <img src={logo} className={cx('logo-img')} alt="" />
+                            <h2>
+                                <span className={cx('first')}>Net</span><span className={cx('last')}>Novels</span>
+                            </h2>
+                        </Link>
+                    </div> */}
+                    <Logo />
                     <button className={cx('menu-btn')} onClick={handleClickBars}><IoMenuOutline /></button>
 
                     <div className={cx('menu', { 'active': showMenu })}>

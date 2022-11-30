@@ -80,7 +80,5 @@ const routes = (routers: Array<RouterType>, index?: number) => {
     )
   })
 
-
-
 }
 export default App

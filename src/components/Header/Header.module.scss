@@ -1,14 +1,21 @@
-@use "../../styles" as vars;
+@use "../../styles" as *;
 
 .header-top {
   box-shadow: 1px 0px 4px 1px rgba($color: #000000, $alpha: 0.2);
-  padding: 6px 0;
+  padding: 12px 0;
   width: 100%;
   position: fixed;
   left: 0;
   z-index: 3;
-  background-color: vars.$whiteColor;
+  background-color: $whiteColor;
   top: 0;
+  @include breakpoint-down(md) {
+    padding: 8px 0;
+  }
+
+  @include breakpoint-down(xs) {
+    padding: 6px 0;
+  }
 }
 
 .header-container {
@@ -17,19 +24,19 @@
   gap: 24px;
   width: 100%;
 
-  @include vars.breakpoint-down(md) {
+  @include breakpoint-down(md) {
     flex-wrap: wrap;
   }
 }
 
 .logo > a {
-  color: vars.$primaryColor;
+  color: $primaryColor;
 
-  @include vars.breakpoint-down(md) {
+  @include breakpoint-down(md) {
     font-size: 1.2rem;
   }
 
-  @include vars.breakpoint-down(xs) {
+  @include breakpoint-down(xs) {
     font-size: 1rem;
   }
   & h2 {
@@ -43,6 +50,9 @@
   }
 }
 
+.logo-img {
+  width: 180px;
+}
 .menu-btn {
   border: none;
   background: transparent;
@@ -52,9 +62,9 @@
   margin-left: auto;
   transition: color 0.3s;
   &:hover {
-    color: vars.$primaryColor;
+    color: $primaryColor;
   }
-  @include vars.breakpoint-down(md) {
+  @include breakpoint-down(md) {
     display: inline-block;
   }
 }
@@ -64,9 +74,9 @@
   flex: 1;
   align-items: center;
 
-  @include vars.breakpoint-down(md) {
+  @include breakpoint-down(md) {
     flex: 100%;
-    background: vars.$whiteColor;
+    background: $whiteColor;
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
@@ -85,7 +95,7 @@
   gap: 24px;
   width: auto;
 
-  @include vars.breakpoint-down(md) {
+  @include breakpoint-down(md) {
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
@@ -95,7 +105,7 @@
 .cate-drop-grid {
   --itemWidth: 150px;
   --cols: 3;
-  @include vars.breakpoint-down(md) {
+  @include breakpoint-down(md) {
     width: 100%;
     --itemWidth: 50%;
     --cols: 2;
@@ -105,7 +115,7 @@
 .list-drop-grid {
   --itemWidth: 200px;
   --cols: 1;
-  @include vars.breakpoint-down(md) {
+  @include breakpoint-down(md) {
     width: 100%;
     flex-direction: column;
   }
@@ -122,11 +132,11 @@
 
 .drop-content__items {
   width: var(--itemWidth);
-  color: vars.$textColor;
+  color: $textColor;
   transition: color 0.3s;
   font-size: 0.85rem;
   &:hover {
-    color: vars.$primaryColor;
+    color: $primaryColor;
   }
 }
 
@@ -136,7 +146,7 @@
   gap: 6px;
   margin-left: auto;
 
-  @include vars.breakpoint-down(md) {
+  @include breakpoint-down(md) {
     margin-left: inherit;
   }
 
@@ -149,7 +159,7 @@
 }
 
 .account {
-  @include vars.breakpoint-down(md) {
+  @include breakpoint-down(md) {
     width: 100%;
     margin-bottom: 6px;
   }
@@ -171,12 +181,12 @@
       gap: 6px;
       padding: 12px 12px;
       transition: color 0.3s;
-      color: vars.$textColor;
+      color: $textColor;
       &:not(:last-child) {
-        border-bottom: 1px solid vars.$separatorColor;
+        border-bottom: 1px solid $separatorColor;
       }
       &:hover {
-        color: vars.$primaryColor;
+        color: $primaryColor;
       }
     }
   }
@@ -196,18 +206,18 @@
     align-items: center;
     padding: 12px;
     gap: 4px;
-    color: vars.$textColor;
+    color: $textColor;
     transition: color 0.3s;
     // height: 50px;
   }
   & a:hover {
-    color: vars.$primaryColor;
+    color: $primaryColor;
   }
   & a:not(:last-child) {
-    border-bottom: 1px solid vars.$separatorColor;
+    border-bottom: 1px solid $separatorColor;
   }
 
-  @include vars.breakpoint-down(md) {
+  @include breakpoint-down(md) {
     width: 100%;
     flex-direction: column;
     & a {
