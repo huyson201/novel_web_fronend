@@ -11,9 +11,19 @@ import authApi from '@src/apis/auth.api'
 import HeaderMenuItem from '../HeaderMenuItem/HeaderMenuItem'
 import logo from '@src/assets/images/logo.png'
 import Logo from '../Logo/Logo'
+import { HeaderMenu, MenuItem, SubMenuItem } from '../HeaderMenu/HeaderMenu'
 
 const cx = classnames.bind(style)
-
+export const menuList = [
+    {
+        name: 'Bảng xếp hạng',
+        slug: 'bxh'
+    },
+    {
+        name: 'Truyện mới cập nhật',
+        slug: 'truyen-moi',
+    },
+]
 const Header = () => {
     const [showMenu, setShowMenu] = useState<boolean>(false)
 
@@ -36,18 +46,37 @@ const Header = () => {
         <header className={cx('header-top')}>
             <div className="wrapper">
                 <div className={cx("header-container")}>
-                    {/* <div className={cx("logo")}>
-                        <Link to={'/'}>
-                            <img src={logo} className={cx('logo-img')} alt="" />
-                            <h2>
-                                <span className={cx('first')}>Net</span><span className={cx('last')}>Novels</span>
-                            </h2>
-                        </Link>
-                    </div> */}
                     <Logo />
                     <button className={cx('menu-btn')} onClick={handleClickBars}><IoMenuOutline /></button>
+                    <HeaderMenu>
+                        <MenuItem title='Thể Loại'>
+                            <SubMenuItem to={'#'}>
+                                dadasd
+                            </SubMenuItem>
+                            <SubMenuItem to={'#'}>
+                                dadasd
+                            </SubMenuItem>
+                            <SubMenuItem to={'#'}>
+                                dadasd
+                            </SubMenuItem>
+                            <SubMenuItem to={'#'}>
+                                dadasd
+                            </SubMenuItem>
+                        </MenuItem>
+                        <MenuItem title=' Danh Sách'>
 
-                    <div className={cx('menu', { 'active': showMenu })}>
+                            {
+                                menuList.map(data => {
+                                    return (
+                                        <SubMenuItem to={data.slug} key={data.slug}>
+                                            {data.name}
+                                        </SubMenuItem>
+                                    )
+                                })
+                            }
+                        </MenuItem>
+                    </HeaderMenu>
+                    {/* <div className={cx('menu', { 'active': showMenu })}>
                         <div className={cx("list-option")}>
                             <HeaderMenuItem title='Thể loại' menuType='cate' />
                             <HeaderMenuItem title='Danh sách' menuType='list' />
@@ -73,7 +102,7 @@ const Header = () => {
                                     </div>
                                 )
                         }
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </header>

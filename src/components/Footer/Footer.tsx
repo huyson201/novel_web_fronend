@@ -11,9 +11,6 @@ const Footer = () => {
         <footer className={cx('footer')}>
             <div className="wrapper">
                 <div className={cx("container")}>
-                    {/* <div className={cx("footer__logo")}>
-                        NetNovel
-                    </div> */}
                     <Logo />
                     <p className={cx("footer__content")}>Website đọc truyện dịch nhanh nhất, ổn định nhất, đọc truyện KHÔNG quảng cáo.</p>
                     <div className={cx("footer__app-links")}>
