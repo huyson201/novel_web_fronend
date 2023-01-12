@@ -15,6 +15,7 @@ export const useFetch = <T>(callApi: () => CallBackType<T>, dependency?: React.D
                 let resData = await callApi()
                 setData(resData)
             } catch (error: any) {
+                console.log(error)
                 setError(error.response?.data?.message ?? error.message)
             } finally {
                 setIsLoading(false)
