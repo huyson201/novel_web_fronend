@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Outlet } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -31,7 +31,9 @@ function App() {
   return (
     <div className="App">
       <Suspense fallback={<PageLoader />}>
-        <Routes>
+        <Outlet />
+
+        {/* <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/" element={<PageContainer />}>
@@ -76,7 +78,7 @@ function App() {
               element={<NotMatch title="Trang này không tồn tại hoặc bị xóa" />}
             />
           </Route>
-        </Routes>
+        </Routes> */}
       </Suspense>
     </div>
   );

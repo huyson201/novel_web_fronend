@@ -1,10 +1,6 @@
 import React from "react";
-import { IoChevronDown, IoLogOutOutline, IoPersonSharp } from "react-icons/io5";
+import { IoChevronDown } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import { LinkButton } from "../Button";
-import { useAppDispatch, useAppSelector } from "@src/redux";
-import { logout } from "@src/redux/features/authSlice";
-import authApi from "@src/apis/auth.api";
 
 import styles from "./HeaderMenu.module.scss";
 import bindClass from "classnames/bind";
@@ -34,15 +30,7 @@ export const menuList = [
   },
 ];
 export const HeaderMenu = ({ children, showMenu }: HeaderMenuProps) => {
-  const auth = useAppSelector((state) => state.auth);
-  const dispatch = useAppDispatch();
-
   const { data: cates, isLoading, error } = useFetch(categoryApi.getAll, []);
-
-  const handleLogout = async () => {
-    await authApi.logout();
-    dispatch(logout());
-  };
 
   return (
     <ul className={cx("header-menu", { active: showMenu }, "wrapper")}>
@@ -53,7 +41,7 @@ export const HeaderMenu = ({ children, showMenu }: HeaderMenuProps) => {
           {cates?.map((cate) => {
             return (
               <li key={cate.slug} className={cx("sub-items")}>
-                <Link to={cate.slug}>{cate.name}</Link>
+                <Link to={`/the-loai/${cate.slug}`}>{cate.name}</Link>
               </li>
             );
           })}

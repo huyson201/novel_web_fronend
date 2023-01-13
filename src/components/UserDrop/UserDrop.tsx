@@ -29,12 +29,12 @@ const UserDrop = () => {
             className="custom-drop"
             dropContentClassName={cx("account-drop-content")}
           >
-            <Link to="/account">
-              <IoPersonSharp />
+            <Link to="/account" className={cx("auth-ops")}>
+              <IoPersonSharp className={cx("auth-ops-icons")} />
               Trang cá nhân
             </Link>
-            <Link to={"#"} onClick={handleLogout}>
-              <IoLogOutOutline />
+            <Link to={"#"} className={cx("auth-ops")} onClick={handleLogout}>
+              <IoLogOutOutline className={cx("auth-ops-icons")} />
               Đăng xuất
             </Link>
           </Dropdown>
