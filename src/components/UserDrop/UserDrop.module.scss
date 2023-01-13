@@ -1,0 +1,88 @@
+@use "@src/styles" as *;
+
+.login-register {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+
+  @include breakpoint-down(md) {
+    margin-left: inherit;
+  }
+
+  & .btn {
+    font-size: 14px;
+    white-space: nowrap;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
+
+.account {
+  @include breakpoint-down(md) {
+    width: 100%;
+    margin-bottom: 6px;
+  }
+  @extend .login-register;
+  & .custom-drop {
+    row-gap: 0;
+    padding: 0 !important;
+    & .drop-toggle-btn {
+      font-weight: 400;
+    }
+
+    & .drop-content {
+      row-gap: 0 !important;
+    }
+
+    & .drop-items {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 12px 12px;
+      transition: color 0.3s;
+      color: $textColor;
+      &:not(:last-child) {
+        border-bottom: 1px solid $separatorColor;
+      }
+      &:hover {
+        color: $primaryColor;
+      }
+    }
+  }
+}
+.account-drop-toggle {
+  font-weight: 600;
+  text-transform: none;
+}
+
+.account-drop-content {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  & a {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    gap: 4px;
+    color: $textColor;
+    transition: color 0.3s;
+    // height: 50px;
+  }
+  & a:hover {
+    color: $primaryColor;
+  }
+  & a:not(:last-child) {
+    border-bottom: 1px solid $separatorColor;
+  }
+
+  @include breakpoint-down(md) {
+    width: 100%;
+    flex-direction: column;
+    & a {
+      height: auto;
+      padding: 12px;
+    }
+  }
+}

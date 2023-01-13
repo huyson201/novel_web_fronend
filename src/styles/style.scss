@@ -38,19 +38,19 @@ a.disabled {
   }
 
   @include vars.breakpoint-down(xl) {
-    max-width: calc(100% - 200px);
+    padding: 0 100px;
   }
 
   @include vars.breakpoint-down(lg) {
-    max-width: calc(100% - 80px);
+    padding: 0 40px;
   }
 
   @include vars.breakpoint-down(sm) {
-    max-width: calc(100% - 40px);
+    padding: 0 20px;
   }
 
   @include vars.breakpoint-down(xs) {
-    max-width: calc(100% - 20px);
+    padding: 0 10px;
   }
 }
 .main-content {

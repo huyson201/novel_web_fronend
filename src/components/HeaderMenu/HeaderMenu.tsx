@@ -1,73 +1,80 @@
-import React, { JSXElementConstructor, useEffect, useMemo, useState } from 'react'
+import React from "react";
+import { IoChevronDown, IoLogOutOutline, IoPersonSharp } from "react-icons/io5";
+import { Link } from "react-router-dom";
+import { LinkButton } from "../Button";
+import { useAppDispatch, useAppSelector } from "@src/redux";
+import { logout } from "@src/redux/features/authSlice";
+import authApi from "@src/apis/auth.api";
 
+import styles from "./HeaderMenu.module.scss";
+import bindClass from "classnames/bind";
+import { useFetch } from "@src/hooks";
+import categoryApi from "@src/apis/category.api";
+import UserDrop from "../UserDrop/UserDrop";
 
-import styles from "./HeaderMenu.module.scss"
-import bindClass from "classnames/bind"
-import { Link, LinkProps } from 'react-router-dom'
-
-const cx = bindClass.bind(styles)
-
-
+const cx = bindClass.bind(styles);
 
 export interface HeaderMenuProps {
-    children?: React.ReactNode | React.ReactNode[] | React.ReactElement | React.ReactElement[],
+  children?:
+    | React.ReactNode
+    | React.ReactNode[]
+    | React.ReactElement
+    | React.ReactElement[];
+  showMenu: boolean;
 }
 
-export const HeaderMenu = ({ children }: HeaderMenuProps) => {
-    return (
-        <ul className={cx("header-menu")}>
-            {children}
+export const menuList = [
+  {
+    name: "Bảng xếp hạng",
+    slug: "danh-sach/bxh",
+  },
+  {
+    name: "Truyện mới cập nhật",
+    slug: "danh-sach/truyen-moi",
+  },
+];
+export const HeaderMenu = ({ children, showMenu }: HeaderMenuProps) => {
+  const auth = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
+
+  const { data: cates, isLoading, error } = useFetch(categoryApi.getAll, []);
+
+  const handleLogout = async () => {
+    await authApi.logout();
+    dispatch(logout());
+  };
+
+  return (
+    <ul className={cx("header-menu", { active: showMenu }, "wrapper")}>
+      <li className={cx("menu-items")}>
+        Thể Loại
+        <IoChevronDown className={cx("arrow-down")} />
+        <ul className={cx("sub-menus", "large-desktop")}>
+          {cates?.map((cate) => {
+            return (
+              <li key={cate.slug} className={cx("sub-items")}>
+                <Link to={cate.slug}>{cate.name}</Link>
+              </li>
+            );
+          })}
         </ul>
-    )
-}
-
-export interface MenuSubItemProps {
-    children?: React.ReactNode | React.ReactNode[] | React.ReactElement | React.ReactElement[],
-    to?: string
-}
-
-export const SubMenuItem = ({ children, ...props }: MenuSubItemProps) => {
-    return (
-        <li className={cx('sub-menu__item')} >
-            <Link to={props.to || "#"}>
-                {children}
-            </Link>
-        </li>
-    )
-}
-
-
-export interface MenuItemProps {
-    children?: React.ReactNode | React.ReactNode[] | React.ReactElement | React.ReactElement[],
-    to?: string,
-    title: string
-}
-export const MenuItem = ({ children, title, ...props }: MenuItemProps) => {
-    // const [listSubItem, setListSubItem] = useState<React.ReactElement[]>([]);
-
-    // useEffect(() => {
-    //     const subItems: React.ReactElement[] = []
-    //     React.Children.forEach(children, (child, index) => {
-    //         if ((child as React.ReactElement).type === (SubMenuItem as React.ReactElement)) {
-    //             subItems.push(React.cloneElement((child as React.ReactElement), { key: index }))
-    //         }
-    //     })
-
-    //     setListSubItem(subItems)
-    // }, [children])
-
-    return (
-        <li>
-            <Link to={props.to || '#'} className={cx("menu-item")}>
-                {title}
-            </Link>
-            <ul className={cx("sub-menu")}>
-                {children}
-            </ul>
-        </li>
-    )
-
-}
-
-
-
+      </li>
+      <li className={cx("menu-items")}>
+        Danh sách
+        <IoChevronDown className={cx("arrow-down")} />
+        <ul className={cx("sub-menus")}>
+          {menuList.map((item) => {
+            return (
+              <li key={item.slug} className={cx("sub-items")}>
+                <Link to={item.slug}>{item.name}</Link>
+              </li>
+            );
+          })}
+        </ul>
+      </li>
+      <li className={cx("menu-items", "login-box")}>
+        <UserDrop />
+      </li>
+    </ul>
+  );
+};
