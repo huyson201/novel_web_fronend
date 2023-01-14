@@ -34,6 +34,9 @@ const bookApi = {
     },
     getByCate: (cateSlug: string, params?: { page?: number, order?: 'desc' | 'asc', sort?: string }) => {
         return axiosClient.get<PaginationResponse<Book>>(`/categories/${cateSlug}/books`, { params: params })
+    },
+    increaseView: async (booId: number) => {
+        return axiosClient.put(`/books/${booId}/view/increase`)
     }
 }
 
