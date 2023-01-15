@@ -20,6 +20,13 @@ import {
   fetchBookSuccess,
 } from "@src/redux/features/bookSlice";
 import authApi from "@src/apis/auth.api";
+import { toast } from "react-toastify";
+import {
+  ADD_BOOKCASE_SUCCESS_MESSAGE,
+  HOME_TOAST_ID,
+  REMOVE_BOOKCASE_SUCCESS_MESSAGE,
+  REQUIRED_LOGIN_MESSAGE,
+} from "@src/utils";
 const cx = classNamesBind.bind(styles);
 
 const Chapter = () => {
@@ -38,15 +45,34 @@ const Chapter = () => {
   };
 
   const handleClickBookmark = async () => {
-    if (!book || !user) return;
-    if (bookcase && bookcase.chapterId === +chapterId) {
-      await authApi.deleteBookcase(book.id);
-      setBookcase(undefined);
-      return;
-    }
+    try {
+      if (!book || !user) {
+        toast.error(REQUIRED_LOGIN_MESSAGE, {
+          autoClose: 1500,
+          containerId: HOME_TOAST_ID,
+        });
+        return;
+      }
 
-    let result = await authApi.addBookcase(book.id, +chapterId);
-    setBookcase(result);
+      if (bookcase && bookcase.chapterId === +chapterId) {
+        await authApi.deleteBookcase(book.id);
+        toast.success(REMOVE_BOOKCASE_SUCCESS_MESSAGE, {
+          autoClose: 2000,
+          containerId: HOME_TOAST_ID,
+        });
+        setBookcase(undefined);
+        return;
+      }
+
+      let result = await authApi.addBookcase(book.id, +chapterId);
+      toast.success(ADD_BOOKCASE_SUCCESS_MESSAGE, {
+        autoClose: 2000,
+        containerId: HOME_TOAST_ID,
+      });
+      setBookcase(result);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -84,11 +110,7 @@ const Chapter = () => {
     fetchBookcaseById();
   }, [user, chapterId, book]);
 
-  const {
-    data: res,
-    isLoading,
-    error,
-  } = useFetch<ChapterResponse>(
+  const { data: res } = useFetch<ChapterResponse>(
     async () => bookApi.getChapter(slug, +chapterId),
     [chapterId, slug]
   );

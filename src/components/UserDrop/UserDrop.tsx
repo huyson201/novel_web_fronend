@@ -8,6 +8,8 @@ import authApi from "@src/apis/auth.api";
 import { logout } from "@src/redux/features/authSlice";
 import bindClass from "classnames/bind";
 import styles from "./UserDrop.module.scss";
+import { toast } from "react-toastify";
+import { HOME_TOAST_ID, LOGOUT_SUCCESS_MESSAGE } from "@src/utils";
 
 const cx = bindClass.bind(styles);
 
@@ -18,6 +20,10 @@ const UserDrop = () => {
   const handleLogout = async () => {
     await authApi.logout();
     dispatch(logout());
+    toast.success(LOGOUT_SUCCESS_MESSAGE, {
+      autoClose: 2000,
+      containerId: HOME_TOAST_ID,
+    });
   };
   return (
     <>
