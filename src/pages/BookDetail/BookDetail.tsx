@@ -141,7 +141,7 @@ const BookDetail = () => {
             <div className={cx("cmt-content")}>
               <FBComment
                 numPosts={3}
-                dataHref={"https://tienvuc.xyz/account"}
+                dataHref={currentURL}
                 orderBy="reverse_time"
               />
             </div>

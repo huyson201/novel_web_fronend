@@ -21,7 +21,7 @@ axiosClient.interceptors.response.use((response) => {
 }, error => {
     console.log(error)
     let { status, config, data } = error.response
-    if (status === 401 && !config._retry && data === "Unauthorized") {
+    if (status && status === 401 && !config._retry && data === "Unauthorized") {
         if (isRefresh) {
             return
         }
