@@ -33,7 +33,7 @@ export const HeaderMenu = ({ children, showMenu }: HeaderMenuProps) => {
   const { data: cates, isLoading, error } = useFetch(categoryApi.getAll, []);
 
   return (
-    <ul className={cx("header-menu", { active: showMenu }, "wrapper")}>
+    <ul className={cx("header-menu", { active: showMenu })}>
       <li className={cx("menu-items")}>
         Thể Loại
         <IoChevronDown className={cx("arrow-down")} />

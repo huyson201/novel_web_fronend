@@ -11,6 +11,12 @@
   width: 100%;
   max-height: 50px;
   background-color: $whiteColor;
+
+  @include breakpoint-down(xl) {
+    padding-right: 0;
+    padding-left: 20px;
+  }
+
   @include breakpoint-down(md) {
     display: block;
     position: absolute;
@@ -21,6 +27,8 @@
     height: calc(100vh - 50px);
     overflow-y: auto;
     overflow-x: hidden;
+    padding: 0 40px;
+
     &:not(.active) {
       display: none;
     }
@@ -34,6 +42,14 @@
     &::-webkit-scrollbar-track {
       background-color: rgba($color: #000000, $alpha: 0.1);
     }
+  }
+
+  @include breakpoint-down(sm) {
+    padding: 0 20px;
+  }
+
+  @include breakpoint-down(xs) {
+    padding: 0 10px;
   }
 }
 .sub-items a,
@@ -89,6 +105,9 @@
 }
 .menu-items.login-box {
   margin-left: auto;
+  @include breakpoint-up(md) {
+    padding: 0;
+  }
 }
 .sub-menus.large-desktop {
   width: 500px;

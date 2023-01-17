@@ -15,12 +15,6 @@
       color: vars.$primaryColor;
     }
   }
-  .swiper-container {
-    padding-bottom: 20px;
-    & .swiper-pagination-box {
-      bottom: -5px;
-    }
-  }
 
   & .swiper-book-card {
     width: 200px;
